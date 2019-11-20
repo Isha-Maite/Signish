@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         fragManager = getSupportFragmentManager();
 
         //usar replace porque add unicamente es para cuando esta vacio
+        //los argumentos son el container y el fragment
         fragManager.beginTransaction().replace(R.id.fragmentLogin,new LoginFragment()).commit();
 
     }

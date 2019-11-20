@@ -96,16 +96,12 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+               // if(loginVistaModelo.userOk)
             }
         });
 
         return interfazLogin;
     }
-
-
-
-
-
 
 
     // TODO: Rename method, update argument and hook method into UI event
