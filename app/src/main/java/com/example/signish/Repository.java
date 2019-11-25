@@ -1,5 +1,13 @@
 package com.example.signish;
 
+import com.example.signish.Modelo.Usuario;
+
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 public class Repository {
 
     //Singleton
@@ -20,10 +28,27 @@ public class Repository {
 
     //Método para verificar usuario correcto
 
-    public Boolean userOk (String user, String pswd){
+    public Boolean userOk (String checkUser, String checkPassword) throws IOException {
 
+        Usuario usuario;
 
-        return true;
+        File fichero = new File("FicheroPersona.dat");
+        FileInputStream filein = new FileInputStream (fichero); //necesario para leer fichero
+        ObjectInputStream dataIS = new ObjectInputStream (filein) ; //para leer objetos
+        try {
+            while (true) {
+                usuario = (Usuario) dataIS.readObject (); //para usar readObject es necesario ObjectInputStream
+
+                if (checkUser.equals(usuario.getUsuario()) && checkPassword.equals(usuario.getPassword())){
+                    return true;
+                }
+            }
+        } catch (EOFException | ClassNotFoundException eo) {
+            System.out.println ("Error de lectura.");
+        }
+        dataIS.close();
+
+        return false;
     }
 
 }

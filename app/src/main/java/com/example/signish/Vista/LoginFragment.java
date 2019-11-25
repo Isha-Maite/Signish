@@ -17,6 +17,8 @@ import android.widget.EditText;
 import com.example.signish.R;
 import com.example.signish.VistaModelo.LoginVistaModelo;
 
+import java.io.IOException;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -38,7 +40,7 @@ public class LoginFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     //declarar variables, luego se le asignara el id
-    EditText textUser,textPass;
+    EditText textUser,textPass,textoOk;
     Button botonEntrar;
 
     //declarar variable del fichero vistamodelo
@@ -91,12 +93,21 @@ public class LoginFragment extends Fragment {
         textUser = interfazLogin.findViewById(R.id.textUser);
         textPass = interfazLogin.findViewById(R.id.textPass);
         botonEntrar = interfazLogin.findViewById(R.id.botonEntrar);
+        textoOk = interfazLogin.findViewById(R.id.textoOk);
 
         botonEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-               // if(loginVistaModelo.userOk)
+                try {
+                    if(loginVistaModelo.userOk(textUser.getText().toString(),textPass.getText().toString())){
+                         textoOk.setText("bienvenid@");
+                    } else {
+                        textoOk.setText("Meeec");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

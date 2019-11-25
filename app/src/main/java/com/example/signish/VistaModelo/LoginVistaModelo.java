@@ -1,6 +1,14 @@
 package com.example.signish.VistaModelo;
 
+import com.example.signish.Modelo.Usuario;
 import com.example.signish.Repository;
+
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 import androidx.lifecycle.ViewModel;
 
@@ -15,9 +23,14 @@ public class LoginVistaModelo extends ViewModel {
 
     //funciones a partir de instrucciones de la vista
 
-    public boolean userOk(String usuario, String password){
 
-        return miRepositorio.userOk(usuario, password);
+
+    ///revisar mucho xD
+
+    public Boolean userOk(String checkUser, String checkPassword) throws IOException {
+
+
+        return miRepositorio.userOk(checkUser,checkPassword);
     }
 
 }
