@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.signish.ViewModel.FichajeViewModel;
 import com.example.signish.R;
@@ -18,6 +19,7 @@ import com.example.signish.R;
 public class FichajeFragment extends Fragment {
 
     private FichajeViewModel mViewModel;
+    Button entradaSalida;
 
     public static FichajeFragment newInstance() {
         return new FichajeFragment();
@@ -26,7 +28,11 @@ public class FichajeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fichaje__fragment, container, false);
+        View ui_layout = inflater.inflate(R.layout.fichaje__fragment, container, false);
+
+        entradaSalida = ui_layout.findViewById(R.id.button);
+
+        return ui_layout;
     }
 
     @Override

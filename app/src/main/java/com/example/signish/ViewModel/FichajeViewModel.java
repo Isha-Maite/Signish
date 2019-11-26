@@ -1,7 +1,10 @@
 package com.example.signish.ViewModel;
-
+import com.example.signish.Repository;
 import androidx.lifecycle.ViewModel;
 
+
 public class FichajeViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
+    Repository miRepositorio = Repository.get();
+
+
 }
