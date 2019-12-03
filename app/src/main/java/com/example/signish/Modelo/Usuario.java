@@ -1,6 +1,8 @@
 package com.example.signish.Modelo;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
 
     String user;
     String password;

@@ -1,54 +1,89 @@
 package com.example.signish;
 
+import android.content.Context;
+import android.os.Environment;
+import android.util.Log;
+
 import com.example.signish.Modelo.Usuario;
 
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 public class Repository {
 
     //Singleton
+
     private static Repository repositorio;
+    private Context context;
+    //private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+    private static String fileName = "userFile.txt";
+    private File file;
+
 
     //Se genera constructor en privado para que no se haga más de un repositorio
-    private Repository (){
+    private Repository() {
     }
 
     //el método get será el encargado de llamar al constructor una única vez
-    public static Repository get(){
+    public static Repository get() {
 
-        if(repositorio == null){
+        if (repositorio == null) {
             repositorio = new Repository();
         }
         return repositorio;
     }
 
-    //Método para verificar usuario correcto
 
-    public Boolean userOk (String checkUser, String checkPassword) throws IOException {
+    //la magia del extraño context
 
-        Usuario usuario;
-
-        File fichero = new File("FicheroPersona.dat");
-        FileInputStream filein = new FileInputStream (fichero); //necesario para leer fichero
-        ObjectInputStream dataIS = new ObjectInputStream (filein) ; //para leer objetos
-        try {
-            while (true) {
-                usuario = (Usuario) dataIS.readObject (); //para usar readObject es necesario ObjectInputStream
-
-                if (checkUser.equals(usuario.getUsuario()) && checkPassword.equals(usuario.getPassword())){
-                    return true;
-                }
-            }
-        } catch (EOFException | ClassNotFoundException eo) {
-            System.out.println ("Error de lectura.");
-        }
-        dataIS.close();
-
-        return false;
+    public void setContext(Context context) {
+        this.context = context.getApplicationContext();
     }
 
-}
+
+    //Método para verificar usuario correcto
+
+
+    public Boolean userOk(String user, String password) throws IOException, ClassNotFoundException {
+
+        Log.i("PROBANDO", "He llegado al fichero");
+        Usuario usuario;
+
+        File fichero = new File (fileName); //meter fichero en variable
+        FileInputStream filein = new FileInputStream(fichero);
+        ObjectInputStream ois = new ObjectInputStream(filein);
+        Log.i("LALALA", "A ver si llego al while");
+        try {
+            while (true){
+                usuario = (Usuario)ois.readObject();
+                System.out.printf(usuario.getUsuario(), usuario.getPassword());
+
+            }
+        } catch (EOFException eo){
+            System.out.println ("Fin");
+        }
+        ois.close();
+        return false;
+
+
+
+        /*
+            if (checkUser.equals(usuario.getUsuario()) && checkPassword.equals(usuario.getPassword())) {
+                dataIS.close();
+                Log.i("LALALA", "He hecho login");
+                return true;
+            } else {
+                dataIS.close();
+                return false;
+            }
+*/
+        }
+    }
+
