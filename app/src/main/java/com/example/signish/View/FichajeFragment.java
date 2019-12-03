@@ -28,9 +28,26 @@ public class FichajeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+
+        mViewModel =
+                ViewModelProviders.of(this).get(FichajeViewModel.class);
         View ui_layout = inflater.inflate(R.layout.fichaje__fragment, container, false);
 
+        mViewModel.setContext(getContext());
         entradaSalida = ui_layout.findViewById(R.id.button);
+
+        entradaSalida.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Button Pressed");
+
+                mViewModel.createEntry();
+
+            }
+        });
+
 
         return ui_layout;
     }
