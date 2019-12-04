@@ -24,7 +24,7 @@ public class Repository {
     private Context context;
     //private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
     private static String fileName = "userFile.txt";
-    private File file;
+
 
 
     //Se genera constructor en privado para que no se haga más de un repositorio
@@ -56,34 +56,35 @@ public class Repository {
         Log.i("PROBANDO", "He llegado al fichero");
         Usuario usuario;
 
-        File fichero = new File (fileName); //meter fichero en variable
-        FileInputStream filein = new FileInputStream(fichero);
+
+        FileInputStream filein = context.openFileInput("userFile.dat");
         ObjectInputStream ois = new ObjectInputStream(filein);
         Log.i("LALALA", "A ver si llego al while");
         try {
-            while (true){
+            do {
                 usuario = (Usuario)ois.readObject();
-                System.out.printf(usuario.getUsuario(), usuario.getPassword());
-
-            }
+                Log.i("PROBANDO", usuario.getUsuario()+usuario.getPassword());
+                if (user.equals(usuario.getUsuario()) && password.equals(usuario.getPassword())) {
+                    ois.close();
+                    Log.i("LALALA", "He hecho login");
+                    return true;
+                } else {
+                    ois.close();
+                    return false;
+                }
+            }while(usuario != null);
         } catch (EOFException eo){
             System.out.println ("Fin");
         }
         ois.close();
         return false;
-
-
-
-        /*
-            if (checkUser.equals(usuario.getUsuario()) && checkPassword.equals(usuario.getPassword())) {
-                dataIS.close();
-                Log.i("LALALA", "He hecho login");
-                return true;
-            } else {
-                dataIS.close();
-                return false;
-            }
-*/
-        }
     }
+    
+}
+
+
+
+
+
+
 

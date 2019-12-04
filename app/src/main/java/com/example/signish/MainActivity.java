@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
             Usuario usuario = new Usuario("Maite", "1234");
             os.writeObject(usuario);
+            os.close();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -60,4 +61,5 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 }
