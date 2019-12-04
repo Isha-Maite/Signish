@@ -16,10 +16,13 @@ import android.widget.Button;
 import com.example.signish.ViewModel.FichajeViewModel;
 import com.example.signish.R;
 
+import java.io.IOException;
+
 public class FichajeFragment extends Fragment {
 
     private FichajeViewModel mViewModel;
-    Button entradaSalida;
+    Button entryButton;
+    Button exitButton;
 
     public static FichajeFragment newInstance() {
         return new FichajeFragment();
@@ -36,14 +39,30 @@ public class FichajeFragment extends Fragment {
         View ui_layout = inflater.inflate(R.layout.fichaje__fragment, container, false);
 
         mViewModel.setContext(getContext());
-        entradaSalida = ui_layout.findViewById(R.id.button);
+        entryButton = ui_layout.findViewById(R.id.button);
+        exitButton = ui_layout.findViewById(R.id.button2);
 
-        entradaSalida.setOnClickListener(new View.OnClickListener() {
+        entryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Button Pressed");
+                System.out.println("Create Button Pressed");
 
                 mViewModel.createEntry();
+
+            }
+        });
+
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Read Button Pressed");
+                try {
+                    mViewModel.readEntry();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
 
             }
         });

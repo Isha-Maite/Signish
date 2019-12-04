@@ -2,6 +2,9 @@ package com.example.signish.ViewModel;
 import android.content.Context;
 
 import com.example.signish.Repository;
+
+import java.io.IOException;
+
 import androidx.lifecycle.ViewModel;
 
 
@@ -16,6 +19,11 @@ public class FichajeViewModel extends ViewModel {
 
     public Boolean createEntry() {
         return miRepositorio.createEntry();
+    }
+
+    public Boolean readEntry() throws IOException, ClassNotFoundException {
+        return miRepositorio.readEntry();
+
     }
 
 

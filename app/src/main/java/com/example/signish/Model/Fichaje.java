@@ -1,7 +1,7 @@
 package com.example.signish.Model;
 
 import java.io.Serializable;
-import java.util.Date;
+
 
 public class Fichaje  implements Serializable {
     private String currentTime;
