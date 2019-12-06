@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.signish.ViewModel.FichajeViewModel;
 import com.example.signish.R;
@@ -23,6 +24,8 @@ public class FichajeFragment extends Fragment {
     private FichajeViewModel mViewModel;
     Button entryButton;
     Button exitButton;
+    Button loadRegistry;
+    TextView chnageText;
 
     public static FichajeFragment newInstance() {
         return new FichajeFragment();
@@ -41,12 +44,14 @@ public class FichajeFragment extends Fragment {
         mViewModel.setContext(getContext());
         entryButton = ui_layout.findViewById(R.id.button);
         exitButton = ui_layout.findViewById(R.id.button2);
+        loadRegistry = ui_layout.findViewById(R.id.button3);
+        chnageText = ui_layout.findViewById(R.id.textView2);
+
 
         entryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Create Button Pressed");
-
+                System.out.println("Entry Button Pressed");
                 mViewModel.createEntry();
 
             }
@@ -55,15 +60,25 @@ public class FichajeFragment extends Fragment {
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Read Button Pressed");
+                System.out.println("Create Button Pressed");
+                mViewModel.createEntry();
+
+            }
+        });
+
+        loadRegistry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Exit Button Pressed");
+
                 try {
+                    chnageText.setText("Your last registry was at: " + mViewModel.readEntry());
                     mViewModel.readEntry();
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
-
             }
         });
 

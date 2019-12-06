@@ -1,4 +1,5 @@
 package com.example.signish.ViewModel;
+
 import android.content.Context;
 
 import com.example.signish.Repository;
@@ -13,7 +14,7 @@ public class FichajeViewModel extends ViewModel {
     Repository miRepositorio = Repository.get();
 
 
-    public void setContext(Context context){
+    public void setContext(Context context) {
         miRepositorio.setContext(context);
     }
 
@@ -21,12 +22,10 @@ public class FichajeViewModel extends ViewModel {
         return miRepositorio.createEntry();
     }
 
-    public Boolean readEntry() throws IOException, ClassNotFoundException {
+    public String readEntry() throws IOException, ClassNotFoundException {
         return miRepositorio.readEntry();
 
     }
-
-
 
 
 }
