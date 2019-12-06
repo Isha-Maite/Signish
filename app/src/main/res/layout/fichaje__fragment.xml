@@ -87,5 +87,19 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView2" />
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="74dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="118dp"
+        android:layout_marginEnd="15dp"
+        android:text="Click here to refresh the page."
+        android:textColor="@android:color/black"
+        android:textSize="8sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
