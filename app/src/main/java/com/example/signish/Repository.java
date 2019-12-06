@@ -1,50 +1,41 @@
 package com.example.signish;
 
 import android.content.Context;
-import android.os.Environment;
 import android.util.Log;
 
-import com.example.signish.Modelo.Usuario;
+import com.example.signish.Model.Fichaje;
+import com.example.signish.Model.Usuario;
 
 import java.io.EOFException;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class Repository {
 
-    //Singleton
-
+    private static final String FILE_NAME = "entradaSalida.dat";
     private static Repository repositorio;
     private Context context;
-    //private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
-    private static String fileName = "userFile.txt";
-
 
 
     //Se genera constructor en privado para que no se haga más de un repositorio
     private Repository() {
     }
 
+    public void setContext(Context context) {
+        this.context = context.getApplicationContext();
+    }
+
     //el método get será el encargado de llamar al constructor una única vez
     public static Repository get() {
-
         if (repositorio == null) {
             repositorio = new Repository();
         }
         return repositorio;
-    }
-
-
-    //la magia del extraño context
-
-    public void setContext(Context context) {
-        this.context = context.getApplicationContext();
     }
 
 
@@ -78,55 +69,6 @@ public class Repository {
         }
         ois.close();
         return false;
-    }
-
-}
-
-
-
-
-
-
-
-
-package com.example.signish;
-
-import android.content.Context;
-import android.util.Log;
-
-
-import com.example.signish.Model.Fichaje;
-
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
-public class Repository {
-
-    private static final String FILE_NAME = "entradaSalida.dat";
-    private static Repository repositorio;
-    private Context context;
-
-
-    //Se genera constructor en privado para que no se haga más de un repositorio
-    private Repository() {
-    }
-
-    public void setContext(Context context) {
-        this.context = context.getApplicationContext();
-    }
-
-    //el método get será el encargado de llamar al constructor una única vez
-    public static Repository get() {
-        if (repositorio == null) {
-            repositorio = new Repository();
-        }
-        return repositorio;
     }
 
 

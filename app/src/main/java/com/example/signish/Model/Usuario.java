@@ -1,4 +1,4 @@
-package com.example.signish.Modelo;
+package com.example.signish.Model;
 
 import java.io.Serializable;
 

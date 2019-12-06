@@ -1,4 +1,4 @@
-package com.example.signish.Vista;
+package com.example.signish.View;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -14,9 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.signish.Modelo.Usuario;
+import com.example.signish.Model.Fichaje;
+import com.example.signish.Model.Usuario;
 import com.example.signish.R;
-import com.example.signish.VistaModelo.ListadoViewModel;
+import com.example.signish.ViewModel.ListadoViewModel;
 
 import java.util.List;
 

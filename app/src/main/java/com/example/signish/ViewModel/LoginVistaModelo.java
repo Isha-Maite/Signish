@@ -1,8 +1,7 @@
-package com.example.signish.VistaModelo;
+package com.example.signish.ViewModel;
 
 import android.content.Context;
 
-import com.example.signish.Modelo.Usuario;
 import com.example.signish.Repository;
 
 import java.io.IOException;

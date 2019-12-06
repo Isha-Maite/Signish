@@ -1,4 +1,4 @@
-package com.example.signish.VistaModelo;
+package com.example.signish.ViewModel;
 
 import android.content.Context;
 

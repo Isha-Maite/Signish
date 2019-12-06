@@ -17,4 +17,5 @@ public class Fichaje  implements Serializable {
     public void setCurrentTime(String currentTime) {
         this.currentTime = currentTime;
     }
+
 }

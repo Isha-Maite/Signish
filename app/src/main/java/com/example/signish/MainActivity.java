@@ -3,25 +3,19 @@ package com.example.signish;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.RandomAccessFile;
 
 import android.content.Context;
 import android.os.Bundle;
 
 
-import com.example.signish.Modelo.Usuario;
-import com.example.signish.Vista.LoginFragment;
+import com.example.signish.Model.Fichaje;
+import com.example.signish.Model.Usuario;
+import com.example.signish.View.LoginFragment;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.RandomAccessFile;
-import java.util.ArrayList;
-
-import com.example.signish.View.FichajeFragment;
 
 public class MainActivity extends AppCompatActivity {
 

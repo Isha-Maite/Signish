@@ -1,11 +1,9 @@
-package com.example.signish.Vista;
+package com.example.signish.View;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
@@ -16,7 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.signish.R;
-import com.example.signish.VistaModelo.LoginVistaModelo;
+import com.example.signish.ViewModel.LoginVistaModelo;
 
 import java.io.IOException;
 
@@ -37,19 +35,13 @@ public class LoginFragment extends Fragment {
 
     //declarar variable del fichero vistamodelo
     LoginVistaModelo loginVistaModelo;
+    FragmentManager fragManager;
 
     public LoginFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LoginFragment.
-     */
+
     // TODO: Rename and change types and number of parameters
     public static LoginFragment newInstance(String param1, String param2) {
         LoginFragment fragment = new LoginFragment();
@@ -66,12 +58,15 @@ public class LoginFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
 
         loginVistaModelo = ViewModelProviders.of(this).get(LoginVistaModelo.class);
         loginVistaModelo.setContext(getContext());
@@ -97,6 +92,8 @@ public class LoginFragment extends Fragment {
                 try {
                     if(loginVistaModelo.userOk(textUser.getText().toString(),textPass.getText().toString())){
                          textoOk.setText("bienvenid@");
+                       //  fragManager.beginTransaction().replace(R.id.)
+
                     } else {
                         textoOk.setText("Meeec");
                     }
