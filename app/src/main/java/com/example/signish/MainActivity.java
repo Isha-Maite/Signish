@@ -21,6 +21,8 @@ import java.io.FileNotFoundException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
+import com.example.signish.View.FichajeFragment;
+
 public class MainActivity extends AppCompatActivity {
 
     FragmentManager fragManager;

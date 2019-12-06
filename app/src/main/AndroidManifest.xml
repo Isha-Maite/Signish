@@ -4,6 +4,11 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    ActivityCompat.requestPermissions(thisActivity,
+    new String[]{Manifest.permission.WRITE_STORAGE},
+    YOUR_PERMISSION_STATIC_CODE_IDENTIFIER);
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
