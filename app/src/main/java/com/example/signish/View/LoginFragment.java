@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
@@ -91,8 +92,10 @@ public class LoginFragment extends Fragment {
 
                 try {
                     if(loginVistaModelo.userOk(textUser.getText().toString(),textPass.getText().toString())){
-                         textoOk.setText("bienvenid@");
-                       //  fragManager.beginTransaction().replace(R.id.)
+                        Fragment fm = new FichajeFragment();
+                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragment_container, fm);
+                        transaction.commit();
 
                     } else {
                         textoOk.setText("Meeec");
