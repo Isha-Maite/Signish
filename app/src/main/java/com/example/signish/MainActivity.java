@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         createEntry();
     }
 
-    public void createEntry(){
+    public void createEntry() {
         try {
             FileOutputStream fos = openFileOutput(FILE_NAME, Context.MODE_APPEND);
             ObjectOutputStream os = new ObjectOutputStream(fos);

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.signish.R;
 import com.example.signish.ViewModel.LoginVistaModelo;
@@ -30,7 +31,7 @@ public class LoginFragment extends Fragment {
     private String mParam2;
 
     //declarar variables, luego se le asignara el id
-    EditText textUser,textPass;
+    EditText textUser, textPass;
     Button botonEntrar;
     TextView textoOk;
 
@@ -68,7 +69,6 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-
         loginVistaModelo = ViewModelProviders.of(this).get(LoginVistaModelo.class);
         loginVistaModelo.setContext(getContext());
 
@@ -79,11 +79,10 @@ public class LoginFragment extends Fragment {
         //ahora identificar las variables con el id de los elementos
 
 
-
         textUser = interfazLogin.findViewById(R.id.textUser);
         textPass = interfazLogin.findViewById(R.id.textPass);
         botonEntrar = interfazLogin.findViewById(R.id.botonEntrar);
-        textoOk = interfazLogin.findViewById(R.id.textoOk);
+
 
         botonEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,14 +90,14 @@ public class LoginFragment extends Fragment {
 
 
                 try {
-                    if(loginVistaModelo.userOk(textUser.getText().toString(),textPass.getText().toString())){
+                    if (loginVistaModelo.userOk(textUser.getText().toString(), textPass.getText().toString())) {
                         Fragment fm = new FichajeFragment();
                         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.fragment_container, fm);
                         transaction.commit();
 
                     } else {
-                        textoOk.setText("Meeec");
+                        Toast.makeText(getContext(), "ERROR!! Wrong Password.", Toast.LENGTH_SHORT).show();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
