@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.signish.Model.Fichaje;
 import com.example.signish.Model.Usuario;
@@ -27,6 +28,8 @@ public class listado extends Fragment {
     //declarar variables, luego se le asignara el id
 
     RecyclerView recyclerView;
+    RecyclerView.Adapter mAdapter;
+    RecyclerView.LayoutManager layoutManager;
 
     //declarar variable del fichero vistamodelo
     ListadoViewModel listadoVistaModelo;
@@ -46,6 +49,9 @@ public class listado extends Fragment {
         recyclerView = interfazListado.findViewById(R.id.noName);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+
+        recyclerView.setAdapter(mAdapter);
+
         return interfazListado;
     }
 
@@ -56,40 +62,55 @@ public class listado extends Fragment {
         // TODO: Use the ViewModel
     }
 
+    //hola qué es un adapter gracias
     public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
-        // lista con los fichajes
-        List<Usuario> fichajes;
 
-        public UserAdapter(List<Usuario> fichajes) {
-            this.fichajes = fichajes;
+        List<Fichaje> listaFichaje;
+
+        public UserAdapter(List<Fichaje> listaFichaje){
+            this.listaFichaje = listaFichaje;
+
         }
 
         @NonNull
         @Override
-        public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return null;
+        public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+            LayoutInflater layoutInflater = getLayoutInflater();
+
+            return new UserViewHolder(layoutInflater,parent);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull UserViewHolder holder, int i) {
+            Fichaje f = listaFichaje.get(i);
+            holder.textHola.setText(f.getCurrentTime());
 
         }
 
         @Override
         public int getItemCount() {
-            return 0;
+
+            return listaFichaje.size();
+
         }
+
+        //subclase para ViewHolder
 
         public class UserViewHolder extends RecyclerView.ViewHolder{
 
             //declarar variables
+            public TextView textHola;
 
-            public UserViewHolder(@NonNull View itemView) {
-                super(itemView);
 
-                //aquí poner lo que se tiene que mostrar (variable/id)
-            }
+           public UserViewHolder(LayoutInflater layoutInflater,ViewGroup parent) {
+
+               super(layoutInflater.inflate(R.layout.viewholder,parent,false));
+
+               //aquí poner lo que se tiene que mostrar (variable/id)
+               textHola = itemView.findViewById(R.id.TextFichaje);
+           }
+
         }
     }
 

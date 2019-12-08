@@ -33,7 +33,6 @@ public class LoginFragment extends Fragment {
     //declarar variables, luego se le asignara el id
     EditText textUser, textPass;
     Button botonEntrar;
-    TextView textoOk;
 
     //declarar variable del fichero vistamodelo
     LoginVistaModelo loginVistaModelo;

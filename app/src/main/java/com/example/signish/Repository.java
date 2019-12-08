@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Repository {
@@ -89,7 +90,10 @@ public class Repository {
                     reset();
                 }
             };
-            objectOutputStream.writeObject(fichaje);
+
+            ArrayList<String> listaFichaje = new ArrayList<>();
+            listaFichaje.add(currentTime());
+            objectOutputStream.writeObject(listaFichaje);
             Log.i("New entry saved at: ", fichaje.getCurrentTime());
             objectOutputStream.close();
 
