@@ -65,7 +65,7 @@ public class FichajeFragment extends Fragment {
 
 
 
-                entryButton.setOnClickListener(new View.OnClickListener() {
+        entryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 System.out.println("Entry Button Pressed");

@@ -7,7 +7,9 @@ import com.example.signish.Model.Fichaje;
 import com.example.signish.Model.Usuario;
 
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -44,13 +46,11 @@ public class Repository {
 
     public Boolean userOk(String user, String password) throws IOException, ClassNotFoundException {
 
-        Log.i("PROBANDO", "He llegado al fichero");
         Usuario usuario;
-
 
         FileInputStream filein = context.openFileInput("userFile.dat");
         ObjectInputStream ois = new ObjectInputStream(filein);
-        Log.i("LALALA", "A ver si llego al while");
+
         try {
             do {
                 usuario = (Usuario)ois.readObject();
@@ -72,34 +72,43 @@ public class Repository {
     }
 
 
-    public Boolean createEntry() {
-        try {
-
-            FileOutputStream fileout = context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
-            ObjectOutputStream dataOS = new ObjectOutputStream(fileout);
-
-            Fichaje fichaje = new Fichaje(currentTime());
-
-            dataOS.writeObject(fichaje);
-            dataOS.close();
-
-            FileOutputStream fileOutputStream = context.openFileOutput(FILE_NAME, Context.MODE_APPEND);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream) {
-                protected void writeStreamHeader() throws IOException {
-                    reset();
-                }
-            };
-            objectOutputStream.writeObject(fichaje);
-            Log.i("New entry saved at: ", fichaje.getCurrentTime());
-            objectOutputStream.close();
-
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
+    public void createUser(Usuario usuario){
 
     }
+
+    /*método para guardar fichajes, modificado para que si el fichero existe no añada la cabecera,
+    Una cabecera que se genera sola en el fichero.
+    Se sobreescribe el método writeStreamHeader
+     */
+
+    public void createEntry() {
+
+        File file = new File(context.getFilesDir() + FILE_NAME);
+        ObjectOutputStream oos;
+        Fichaje fichaje = null;
+        try {
+            if (!file.exists()) {
+                FileOutputStream fos = context.openFileOutput(FILE_NAME, Context.MODE_APPEND);
+                oos = new ObjectOutputStream(fos);
+            } else {
+                FileOutputStream fos = context.openFileOutput(FILE_NAME, Context.MODE_APPEND);
+                oos = new ObjectOutputStream(fos) {
+                    protected void writeStreamHeader() throws IOException {
+                        reset();
+                    }
+                };
+            }
+
+            oos.writeObject(fichaje.getCurrentTime());
+            Log.i("New entry saved at: ", fichaje.getCurrentTime());
+            oos.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+    }
+
 
     public String readEntry() throws IOException, ClassNotFoundException {
 
@@ -107,7 +116,7 @@ public class Repository {
         FileInputStream fileInputStream = context.openFileInput(FILE_NAME);
         ObjectInputStream ois = new ObjectInputStream(fileInputStream);
 
-
+        //arreglar método, solo entrará una vez con el return dentro
         try {
             while (true) {
                 fichaje = (Fichaje) ois.readObject();

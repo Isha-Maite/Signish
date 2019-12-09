@@ -49,8 +49,11 @@ public class Listado extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        //declarar variable y pegar el return
+        //Le decimos el fragment que tiene que utilizar
         View interfazListado = inflater.inflate(R.layout.listado_fragment, container, false);
+
+        //noName es el "recyclerView" añadido en el xml del fragment, el espacio donde
+        //se mostrará la info que se quiera listar
         recyclerView = interfazListado.findViewById(R.id.noName);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -63,11 +66,11 @@ public class Listado extends Fragment {
         Log.i("prueba","crear usuarios y array");
 
 
-        //adaptador
 
-        userAdapter = new UserAdapter(interfazListado.getContext(),listaUsuarios);
+        //El adapter es el traductor que recibe datos y los pinta en la pantalla
+        userAdapter = new UserAdapter(listaUsuarios);
 
-        //añadir el adapter al recyclerView
+        //añadir el adapter al recyclerView. Se genera como clase interna
         recyclerView.setAdapter(userAdapter);
 
         return interfazListado;
@@ -84,11 +87,9 @@ public class Listado extends Fragment {
 
         // lista con los fichajes
         List<Usuario> fichajes;
-        //private  LayoutInflater mInflater;
 
-        // Recibe el context para usar el inflate.
-        public UserAdapter(Context context, List<Usuario> fichajes) {
-            //this.mInflater = LayoutInflater.from(context);
+
+        public UserAdapter(List<Usuario> fichajes) {
             this.fichajes = fichajes;
         }
 
@@ -99,6 +100,7 @@ public class Listado extends Fragment {
             return new UserViewHolder(view);
         }
 
+        //Se encarga de pintar los datos
         @Override
         public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
             Usuario usuario_fichado = fichajes.get(position);
@@ -108,6 +110,7 @@ public class Listado extends Fragment {
         }
 
         @Override
+        //Sobreescribir para poder ver el tamaño de la array
         public int getItemCount() {
             return fichajes.size();
         }
