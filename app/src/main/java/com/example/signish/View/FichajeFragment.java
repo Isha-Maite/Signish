@@ -1,5 +1,6 @@
 package com.example.signish.View;
 
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -27,6 +28,8 @@ public class FichajeFragment extends Fragment {
     Button loadRegistry;
     TextView chnageText;
 
+    Button botonFichajes;
+
     public static FichajeFragment newInstance() {
         return new FichajeFragment();
     }
@@ -47,8 +50,22 @@ public class FichajeFragment extends Fragment {
         loadRegistry = ui_layout.findViewById(R.id.button3);
         chnageText = ui_layout.findViewById(R.id.textView2);
 
+        botonFichajes = ui_layout.findViewById(R.id.verFichajes);
 
-        entryButton.setOnClickListener(new View.OnClickListener() {
+
+        botonFichajes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fm = new Listado();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, fm);
+                transaction.commit();
+            }
+        });
+
+
+
+                entryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 System.out.println("Entry Button Pressed");
