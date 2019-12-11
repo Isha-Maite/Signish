@@ -113,7 +113,7 @@ public class Repository {
     }
 
 
-    public String readEntry() throws IOException, ClassNotFoundException {
+    public void readEntry() throws IOException {
 
         Fichaje fichaje;
         FileInputStream fileInputStream = context.openFileInput(FILE_NAME);
@@ -125,15 +125,16 @@ public class Repository {
                 fichaje = (Fichaje) ois.readObject();
                 Log.i("PROBANDO Leer", fichaje.getCurrentTime());
                 ois.close();
-                return fichaje.getCurrentTime();
-
 
             }
+            //return fichaje.getCurrentTime();
         } catch (EOFException eo) {
             System.out.println("Fin");
             ois.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
-        return null;
+
     }
 
 
