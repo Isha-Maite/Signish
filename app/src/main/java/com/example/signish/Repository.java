@@ -22,6 +22,7 @@ public class Repository {
     private static final String FILE_NAME = "entradaSalida.dat";
     private static Repository repositorio;
     private Context context;
+    private File file = null;
 
 
     //Se genera constructor en privado para que no se haga más de un repositorio
@@ -83,14 +84,16 @@ public class Repository {
 
     public void createEntry() {
 
-        File file = new File(context.getFilesDir() + FILE_NAME);
         ObjectOutputStream oos;
-        Fichaje fichaje = null;
+        Fichaje fichaje = new Fichaje(Calendar.getInstance().getTime().toString());
         try {
-            if (!file.exists()) {
+            if (file==null) {
+                file = new File(context.getFilesDir()+FILE_NAME);
                 FileOutputStream fos = context.openFileOutput(FILE_NAME, Context.MODE_APPEND);
                 oos = new ObjectOutputStream(fos);
+                Log.i("nuevo fichero", "primera entrada");
             } else {
+                Log.i("existe fichero", "siguiente entrada");
                 FileOutputStream fos = context.openFileOutput(FILE_NAME, Context.MODE_APPEND);
                 oos = new ObjectOutputStream(fos) {
                     protected void writeStreamHeader() throws IOException {

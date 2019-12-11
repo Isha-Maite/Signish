@@ -89,7 +89,7 @@ public class FichajeFragment extends Fragment {
                 System.out.println("Exit Button Pressed");
 
                 try {
-                    chnageText.setText("Your last registry was at: " + mViewModel.readEntry());
+                    //chnageText.setText("Your last registry was at: " + mViewModel.readEntry());
                     mViewModel.readEntry();
                 } catch (IOException e) {
                     e.printStackTrace();

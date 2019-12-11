@@ -19,7 +19,7 @@ public class FichajeViewModel extends ViewModel {
     }
 
     public void createEntry() {
-        //return miRepositorio.createEntry();
+        miRepositorio.createEntry();
     }
 
     public String readEntry() throws IOException, ClassNotFoundException {
