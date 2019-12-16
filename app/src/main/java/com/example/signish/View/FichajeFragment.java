@@ -87,15 +87,20 @@ public class FichajeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 System.out.println("Exit Button Pressed");
-
                 try {
-                    //chnageText.setText("Your last registry was at: " + mViewModel.readEntry());
+                    mViewModel.readEntry();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                /*try {
+                    chnageText.setText("Your last registry was at:");
                     mViewModel.readEntry();
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
-                }
+                }*/
             }
         });
 

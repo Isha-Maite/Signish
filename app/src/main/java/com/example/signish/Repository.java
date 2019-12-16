@@ -86,9 +86,10 @@ public class Repository {
 
         ObjectOutputStream oos;
         Fichaje fichaje = new Fichaje(Calendar.getInstance().getTime().toString());
+        file = new File(context.getFilesDir()+"/"+FILE_NAME);
         try {
-            if (file==null) {
-                file = new File(context.getFilesDir()+FILE_NAME);
+            if (!file.exists()) {
+
                 FileOutputStream fos = context.openFileOutput(FILE_NAME, Context.MODE_APPEND);
                 oos = new ObjectOutputStream(fos);
                 Log.i("nuevo fichero", "primera entrada");
@@ -102,38 +103,44 @@ public class Repository {
                 };
             }
 
-            oos.writeObject(fichaje.getCurrentTime());
-            Log.i("New entry saved at: ", fichaje.getCurrentTime());
+            oos.writeObject(fichaje);
+            Log.i("Nueva entrada",  "fichaje guardado");
             oos.close();
 
         } catch (IOException e) {
             e.printStackTrace();
 
         }
+
     }
 
 
-    public String readEntry() throws IOException, ClassNotFoundException {
+    public void readEntry() throws IOException {
+
+        FileInputStream fis2 = context.openFileInput(FILE_NAME);
+        ObjectInputStream ois = new ObjectInputStream(fis2);
 
         Fichaje fichaje;
-        FileInputStream fileInputStream = context.openFileInput(FILE_NAME);
-        ObjectInputStream ois = new ObjectInputStream(fileInputStream);
-
-        //arreglar método, solo entrará una vez con el return dentro
+        //arreglar método
         try {
-            while (true) {
+            do {
+
                 fichaje = (Fichaje) ois.readObject();
-                Log.i("PROBANDO Leer", fichaje.getCurrentTime());
-                ois.close();
-                return fichaje.getCurrentTime();
+                Log.i("PROBANDO Leer", "do while");
+                System.out.println(fichaje.getCurrentTime());
 
 
-            }
+            } while(fichaje != null);
+            ois.close();
+            //return fichaje.getCurrentTime();
         } catch (EOFException eo) {
             System.out.println("Fin");
-            ois.close();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
-        return null;
+        ois.close();
+
     }
 
 

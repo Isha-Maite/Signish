@@ -22,10 +22,10 @@ public class FichajeViewModel extends ViewModel {
         miRepositorio.createEntry();
     }
 
-    public String readEntry() throws IOException, ClassNotFoundException {
-        return miRepositorio.readEntry();
+    public void readEntry() throws IOException {
+        miRepositorio.readEntry();
+        //return miRepositorio.readEntry();
 
     }
-
 
 }
