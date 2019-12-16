@@ -28,5 +28,4 @@ public class FichajeViewModel extends ViewModel {
 
     }
 
-
 }
