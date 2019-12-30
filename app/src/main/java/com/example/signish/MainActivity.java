@@ -7,8 +7,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 
 
 import com.example.signish.Model.Fichaje;
@@ -38,6 +42,18 @@ public class MainActivity extends AppCompatActivity {
         fragManager.beginTransaction().replace(R.id.fragment_container, new LoginFragment()).commit();
 
         createEntry();
+
+        UsuarioDbHelper admin = new UsuarioDbHelper(this);
+
+        //UsuarioDbHelper admin = new UsuarioDbHelper(this,"Usuarios.db",null,1);
+        //guardar instancia para lectura de la bbdd en variable
+        SQLiteDatabase db = admin.getReadableDatabase();
+
+
+
+        Cursor cursor = db.query("usuarios", null, null, null, null, null, null);
+        int numUsuarios = cursor.getCount();
+        Log.i ("holi","cursor usurios" + (numUsuarios));
     }
 
     public void createEntry() {

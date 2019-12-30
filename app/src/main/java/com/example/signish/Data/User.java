@@ -1,8 +1,12 @@
 package com.example.signish.Data;
 
+import android.content.ContentValues;
+
 import java.util.UUID;
 
-public class EntidadUsuario {
+//Entidad USUARIO
+
+public class User {
 
     private String id;
     private String dni;
@@ -14,8 +18,8 @@ public class EntidadUsuario {
     private String rol;
     private String jornada;
 
-    public EntidadUsuario(String nombre, String dni, String apellido,String apellido2,String hijos, String discapacidad,
-    String rol,String jornada){
+    public User(String dni, String nombre, String apellido, String apellido2, String hijos, String discapacidad,
+                String rol, String jornada){
 
         this.id = UUID.randomUUID().toString();
         this.dni = dni;
@@ -26,6 +30,21 @@ public class EntidadUsuario {
         this.discapacidad = discapacidad;
         this.rol = rol;
         this.jornada = jornada;
+
+    }
+
+    public ContentValues toContentValues(){
+        ContentValues values = new ContentValues();
+        values.put(UsuariosEsquema.UsuariosEntrada.ID, id);
+        values.put(UsuariosEsquema.UsuariosEntrada.DNI, dni);
+        values.put(UsuariosEsquema.UsuariosEntrada.NOMBRE, nombre);
+        values.put(UsuariosEsquema.UsuariosEntrada.APELLIDO, apellido);
+        values.put(UsuariosEsquema.UsuariosEntrada.APELLIDO2, apellido2);
+        values.put(UsuariosEsquema.UsuariosEntrada.HIJOS, hijos);
+        values.put(UsuariosEsquema.UsuariosEntrada.DISCAPACIDAD, discapacidad);
+        values.put(UsuariosEsquema.UsuariosEntrada.ROL, rol); //usuario o admin
+        values.put(UsuariosEsquema.UsuariosEntrada.JORNADA, jornada); //normal o reducida
+        return values;
 
     }
 
