@@ -1,4 +1,6 @@
 package com.example.signish.View;
 
-public class InternetView {
+import androidx.fragment.app.Fragment;
+
+public class InternetView extends Fragment {
 }

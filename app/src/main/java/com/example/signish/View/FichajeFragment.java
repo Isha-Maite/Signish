@@ -4,6 +4,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,8 @@ import com.example.signish.ViewModel.FichajeViewModel;
 import com.example.signish.R;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class FichajeFragment extends Fragment {
 
@@ -105,12 +108,12 @@ public class FichajeFragment extends Fragment {
         internetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
-                    Thread.sleep(10000);
+                /*Fragment fm = new InternetView();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, fm);
+                transaction.commit();*/
 
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                Hilo hilo1 = new Hilo();
             }
         });
 
@@ -124,5 +127,23 @@ public class FichajeFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(FichajeViewModel.class);
         // TODO: Use the ViewModel
     }
+
+    //esta clase permite que pueda ser ejecutado
+    public class Hilo extends AsyncTask<String,Void,String> {
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            HttpURLConnection connection;
+            URL ur1;
+            connection = null;
+
+
+
+            return null;
+        }
+    }
+
 
 }

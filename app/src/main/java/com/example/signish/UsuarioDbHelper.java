@@ -15,8 +15,8 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
 
     private static final String NOMBRE_BBDD = "Usuarios.db";
     private static final int VERSION = 1;
-    private Context context;
-    User user;
+    //private Context context;
+    //User user;
 
 
 
