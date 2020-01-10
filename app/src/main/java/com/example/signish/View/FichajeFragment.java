@@ -22,9 +22,14 @@ import com.example.signish.MainActivity;
 import com.example.signish.ViewModel.FichajeViewModel;
 import com.example.signish.R;
 
+import java.io.BufferedReader;
+import java.io.EOFException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class FichajeFragment extends Fragment {
 
@@ -36,6 +41,8 @@ public class FichajeFragment extends Fragment {
     Button internetButton;
 
     Button botonFichajes;
+
+    String variableDatosGoogle ="";
 
     public static FichajeFragment newInstance() {
         return new FichajeFragment();
@@ -108,12 +115,10 @@ public class FichajeFragment extends Fragment {
         internetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Fragment fm = new InternetView();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container, fm);
-                transaction.commit();*/
+
 
                 Hilo hilo1 = new Hilo();
+                hilo1.execute("http://www.google.es");
             }
         });
 
@@ -128,9 +133,11 @@ public class FichajeFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
-    //esta clase permite que pueda ser ejecutado
+
     public class Hilo extends AsyncTask<String,Void,String> {
 
+        /*Esta función recibe una cadena con la direccion URL y devuelve una cadena con el
+        contenido de la Web indicada. En caso de error se devolverá null. */
 
         @Override
         protected String doInBackground(String... strings) {
@@ -138,12 +145,57 @@ public class FichajeFragment extends Fragment {
             HttpURLConnection connection;
             URL ur1;
             connection = null;
+            String result;
+            result="";
 
 
+            try{
+                ur1 = new URL(strings[0]);
+                connection = (HttpURLConnection) ur1.openConnection();
 
-            return null;
+
+                if(connection.getResponseCode() == HttpURLConnection.HTTP_OK){
+                    StringBuilder sb = new StringBuilder();
+                    InputStreamReader is = new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8);
+                    BufferedReader reader = new BufferedReader(is);
+                    String linea;
+                    while((linea = reader.readLine()) != null){
+                        sb.append(linea);
+                    }
+
+                    result = sb.toString();
+                    reader.close();
+
+                }
+
+            }catch (Exception e){
+
+            }
+            //Se cierra siempre la conexión HTTP.
+            finally {
+                if(connection != null){
+                    connection.disconnect();
+                }
+            }
+
+            return result;
+        }
+
+        //Definir qué hacer con la return del hilo
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            variableDatosGoogle = s;
+            //crear Bundle para pasar datos al fragment
+            Bundle enviarDatos = new Bundle();
+            enviarDatos.putString("parametro", variableDatosGoogle);
+            Fragment fm = new InternetView();
+            fm.setArguments(enviarDatos);
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, fm);
+            transaction.commit();
+
         }
     }
-
 
 }
