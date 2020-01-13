@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,"Intranet",Toast.LENGTH_SHORT).show();
 
             Hilo hilo1 = new Hilo();
-            hilo1.execute("http://www.google.es");
+            hilo1.execute("https://agora.xtec.cat/insjoandaustria/moodle/login/index.php");
         }
 
 
