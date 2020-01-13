@@ -13,6 +13,9 @@
     <item android:title="Company intranet"
         android:id="@+id/menu_intranet"/>
 
+    <item android:title="FeedBack Message"
+        android:id="@+id/menu_feedback"/>
+
     <item android:title="Menu"
         android:id="@+id/menu_menu"
         app:showAsAction="always"/>

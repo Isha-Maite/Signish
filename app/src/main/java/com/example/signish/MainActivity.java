@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.signish.Model.Fichaje;
 import com.example.signish.Model.Usuario;
+import com.example.signish.View.Feedback_Messages;
 import com.example.signish.View.FichajeFragment;
 import com.example.signish.View.InternetView;
 import com.example.signish.View.Listado;
@@ -61,6 +62,16 @@ public class MainActivity extends AppCompatActivity {
         if(id==R.id.menu_home){
             fragManager = getSupportFragmentManager();
             fragManager.beginTransaction().replace(R.id.fragment_container, new LoginFragment()).commit();
+        }
+
+        if(id==R.id.menu_feedback){
+            Toast.makeText(this,"FeedBack",Toast.LENGTH_SHORT).show();
+            Fragment fm = new Feedback_Messages();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, fm);
+            transaction.commit();
+
+
         }
 
         if(id==R.id.menu_in){
