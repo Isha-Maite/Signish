@@ -106,7 +106,4 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
 
     }
 
-
-
-
 }

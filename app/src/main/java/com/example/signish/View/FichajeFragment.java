@@ -42,7 +42,7 @@ public class FichajeFragment extends Fragment {
 
     Button botonFichajes;
 
-    String variableDatosGoogle ="";
+
 
     public static FichajeFragment newInstance() {
         return new FichajeFragment();
@@ -63,9 +63,8 @@ public class FichajeFragment extends Fragment {
         exitButton = ui_layout.findViewById(R.id.button2);
         loadRegistry = ui_layout.findViewById(R.id.button3);
         //chnageText = ui_layout.findViewById(R.id.textView2);
-
         botonFichajes = ui_layout.findViewById(R.id.verFichajes);
-        internetButton = ui_layout.findViewById(R.id.BttInternet);
+
 
 
         botonFichajes.setOnClickListener(new View.OnClickListener() {
@@ -111,17 +110,6 @@ public class FichajeFragment extends Fragment {
             }
         });
 
-        //Pruebas aquí para conexión a página web
-        internetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                Hilo hilo1 = new Hilo();
-                hilo1.execute("http://www.google.es");
-            }
-        });
-
 
         return ui_layout;
     }
@@ -134,68 +122,6 @@ public class FichajeFragment extends Fragment {
     }
 
 
-    public class Hilo extends AsyncTask<String,Void,String> {
 
-        /*Esta función recibe una cadena con la direccion URL y devuelve una cadena con el
-        contenido de la Web indicada. En caso de error se devolverá null. */
-
-        @Override
-        protected String doInBackground(String... strings) {
-
-            HttpURLConnection connection;
-            URL ur1;
-            connection = null;
-            String result;
-            result="";
-
-
-            try{
-                ur1 = new URL(strings[0]);
-                connection = (HttpURLConnection) ur1.openConnection();
-
-
-                if(connection.getResponseCode() == HttpURLConnection.HTTP_OK){
-                    StringBuilder sb = new StringBuilder();
-                    InputStreamReader is = new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8);
-                    BufferedReader reader = new BufferedReader(is);
-                    String linea;
-                    while((linea = reader.readLine()) != null){
-                        sb.append(linea);
-                    }
-
-                    result = sb.toString();
-                    reader.close();
-
-                }
-
-            }catch (Exception e){
-
-            }
-            //Se cierra siempre la conexión HTTP.
-            finally {
-                if(connection != null){
-                    connection.disconnect();
-                }
-            }
-
-            return result;
-        }
-
-        //Definir qué hacer con la return del hilo
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            variableDatosGoogle = s;
-            //crear Bundle para pasar datos al fragment
-            Bundle enviarDatos = new Bundle();
-            enviarDatos.putString("parametro", variableDatosGoogle);
-            Fragment fm = new InternetView();
-            fm.setArguments(enviarDatos);
-            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_container, fm);
-            transaction.commit();
-
-        }
-    }
 
 }
