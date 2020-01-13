@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "447447488710-0omsoaef9d43amspjloj2ud96jmlasmj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.signish",
+            "certificate_hash": "a77a20f3da7d97d26031ef0c722955883c98f40d"
+          }
+        },
+        {
           "client_id": "447447488710-si6in1kfvecn48p7klcs9ml378qd4sov.apps.googleusercontent.com",
           "client_type": 3
         }
