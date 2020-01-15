@@ -99,7 +99,7 @@ public class Repository {
 
 
 
-        //The following code is to create entry and save into a binary file.
+        //----- The following code is to create an entry and save into a binary file. ------
 
 //        ObjectOutputStream oos;
 //        Fichaje fichaje = new Fichaje(Calendar.getInstance().getTime().toString());

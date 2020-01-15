@@ -9,6 +9,8 @@ import android.util.Log;
 import com.example.signish.Data.EntryFichaje;
 import com.example.signish.Data.FichajeEsquema;
 
+import java.util.Calendar;
+
 import androidx.annotation.Nullable;
 
 public class FichajeDbHelper extends SQLiteOpenHelper {
@@ -23,7 +25,7 @@ public class FichajeDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.i("prueba", "Se crea el fichero para entradas de fichajes");
-        db.execSQL("CREATE TABLE " + FichajeEsquema.FichajeEntrada.TABLE_NAME + "("
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + FichajeEsquema.FichajeEntrada.TABLE_NAME + "("
                 + FichajeEsquema.FichajeEntrada._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 FichajeEsquema.FichajeEntrada.ID + " TEXT NOT NULL," +
                 FichajeEsquema.FichajeEntrada.currentTime + " TEXT NOT NULL,"
@@ -34,7 +36,7 @@ public class FichajeDbHelper extends SQLiteOpenHelper {
 
         // Pares clave-valor
         values.put(FichajeEsquema.FichajeEntrada.ID, "1");
-        values.put(FichajeEsquema.FichajeEntrada.currentTime, "08:00");
+        values.put(FichajeEsquema.FichajeEntrada.currentTime, Calendar.getInstance().getTime().toString());
 
         // Insertar...
         db.insert(FichajeEsquema.FichajeEntrada.TABLE_NAME, null, values);
