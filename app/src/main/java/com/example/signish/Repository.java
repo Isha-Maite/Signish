@@ -1,6 +1,8 @@
 package com.example.signish;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.signish.Model.Fichaje;
@@ -84,33 +86,48 @@ public class Repository {
 
     public void createEntry() {
 
-        ObjectOutputStream oos;
-        Fichaje fichaje = new Fichaje(Calendar.getInstance().getTime().toString());
-        file = new File(context.getFilesDir()+"/"+FILE_NAME);
-        try {
-            if (!file.exists()) {
+        FichajeDbHelper admin = new FichajeDbHelper(context);
 
-                FileOutputStream fos = context.openFileOutput(FILE_NAME, Context.MODE_APPEND);
-                oos = new ObjectOutputStream(fos);
-                Log.i("nuevo fichero", "primera entrada");
-            } else {
-                Log.i("existe fichero", "siguiente entrada");
-                FileOutputStream fos = context.openFileOutput(FILE_NAME, Context.MODE_APPEND);
-                oos = new ObjectOutputStream(fos) {
-                    protected void writeStreamHeader() throws IOException {
-                        reset();
-                    }
-                };
-            }
+        SQLiteDatabase db = admin.getReadableDatabase();
 
-            oos.writeObject(fichaje);
-            Log.i("Nueva entrada",  "fichaje guardado");
-            oos.close();
+        Cursor cursor = db.query("fichajes", null, null, null, null, null, null);
 
-        } catch (IOException e) {
-            e.printStackTrace();
 
-        }
+        Log.i("Fichaje", "Ha creado Entrada");
+
+
+
+
+
+        //The following code is to create entry and save into a binary file.
+
+//        ObjectOutputStream oos;
+//        Fichaje fichaje = new Fichaje(Calendar.getInstance().getTime().toString());
+//        file = new File(context.getFilesDir()+"/"+FILE_NAME);
+//        try {
+//            if (!file.exists()) {
+//
+//                FileOutputStream fos = context.openFileOutput(FILE_NAME, Context.MODE_APPEND);
+//                oos = new ObjectOutputStream(fos);
+//                Log.i("nuevo fichero", "primera entrada");
+//            } else {
+//                Log.i("existe fichero", "siguiente entrada");
+//                FileOutputStream fos = context.openFileOutput(FILE_NAME, Context.MODE_APPEND);
+//                oos = new ObjectOutputStream(fos) {
+//                    protected void writeStreamHeader() throws IOException {
+//                        reset();
+//                    }
+//                };
+//            }
+//
+//            oos.writeObject(fichaje);
+//            Log.i("Nueva entrada",  "fichaje guardado");
+//            oos.close();
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//
+//        }
 
     }
 
