@@ -86,6 +86,7 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
     private void mockData(SQLiteDatabase sqLiteDatabase){
         mocKUser(sqLiteDatabase,new User("47778541","Marc","Soler", "4474","1","33","U","N"));
         mocKUser(sqLiteDatabase,new User("X4788741D","Isha", "Noor", "4321", "0","0","A","N"));
+        mocKUser(sqLiteDatabase,new User("3610648L","Nuria", "Abad", "4321", "0","0","A","N"));
         Log.i("prueba", "post mockData");
     }
 
