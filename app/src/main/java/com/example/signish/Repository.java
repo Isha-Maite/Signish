@@ -1,10 +1,12 @@
 package com.example.signish;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.signish.Data.FichajeEsquema;
 import com.example.signish.Model.Fichaje;
 import com.example.signish.Model.Usuario;
 
@@ -75,62 +77,35 @@ public class Repository {
     Se sobreescribe el método writeStreamHeader*/
     public void createEntry() {
 
-        ObjectOutputStream oos;
-        Fichaje fichaje = new Fichaje(Calendar.getInstance().getTime().toString());
-        file = new File(context.getFilesDir()+"/"+FILE_NAME);
-        try {
-            if (!file.exists()) {
+        FichajeDbHelper admin = new FichajeDbHelper(context);
 
-                FileOutputStream fos = context.openFileOutput(FILE_NAME, Context.MODE_APPEND);
-                oos = new ObjectOutputStream(fos);
-                Log.i("nuevo fichero", "primera entrada");
-            } else {
-                Log.i("existe fichero", "siguiente entrada");
-                FileOutputStream fos = context.openFileOutput(FILE_NAME, Context.MODE_APPEND);
-                oos = new ObjectOutputStream(fos) {
-                    protected void writeStreamHeader() throws IOException {
-                        reset();
-                    }
-                };
-            }
+        SQLiteDatabase db = admin.getReadableDatabase();
 
-            oos.writeObject(fichaje);
-            Log.i("Nueva entrada",  "fichaje guardado");
-            oos.close();
+        ContentValues values = new ContentValues();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        //values.put(FichajeEsquema.FichajeEntrada.ID, (byte[]) null);
+        values.put(FichajeEsquema.FichajeEntrada.currentTime, Calendar.getInstance().getTime().toString());
 
-        }
+        // Insertar...
+        db.insert(FichajeEsquema.FichajeEntrada.TABLE_NAME, null, values);
+
+        Log.i("Fichaje", "Ha creado Entrada");
 
     }
 
 
     public void readEntry() throws IOException {
 
-        FileInputStream fis2 = context.openFileInput(FILE_NAME);
-        ObjectInputStream ois = new ObjectInputStream(fis2);
+        FichajeDbHelper admin = new FichajeDbHelper(context);
 
-        Fichaje fichaje;
-        //arreglar método
-        try {
-            do {
+        SQLiteDatabase db = admin.getReadableDatabase();
 
-                fichaje = (Fichaje) ois.readObject();
-                Log.i("PROBANDO Leer", "do while");
-                System.out.println(fichaje.getCurrentTime());
+        Cursor cursor = db.rawQuery("SELECT currenttime from fichajes", null);
+        while(cursor.moveToNext()){
+            String currentimeSql = cursor.getString(cursor.getColumnIndex("currentTime"));
 
-
-            } while(fichaje != null);
-            ois.close();
-            //return fichaje.getCurrentTime();
-        } catch (EOFException eo) {
-            System.out.println("Fin");
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        ois.close();
+            System.out.print("\n" + currentimeSql + "\n");
+        } cursor.close();
 
     }
 
