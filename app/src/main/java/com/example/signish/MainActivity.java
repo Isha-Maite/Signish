@@ -96,8 +96,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         //instanciar el fragment
         fragManager = getSupportFragmentManager();
 
@@ -111,14 +109,10 @@ public class MainActivity extends AppCompatActivity {
 
         //UsuarioDbHelper admin = new UsuarioDbHelper(this,"Usuarios.db",null,1);
         //guardar instancia para lectura de la bbdd en variable
-        SQLiteDatabase db = admin.getReadableDatabase();
+        //SQLiteDatabase db = admin.getReadableDatabase();
 
-
-
-        Cursor cursor = db.query("usuarios", null, null, null, null, null, null);
-        int numUsuarios = cursor.getCount();
-        Log.i ("holi","cursor usurios" + (numUsuarios));
     }
+
 
     public void createEntry() {
         try {
