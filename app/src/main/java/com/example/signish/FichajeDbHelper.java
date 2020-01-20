@@ -27,37 +27,9 @@ public class FichajeDbHelper extends SQLiteOpenHelper {
         Log.i("prueba", "Se crea el fichero para entradas de fichajes");
         db.execSQL("CREATE TABLE IF NOT EXISTS " + FichajeEsquema.FichajeEntrada.TABLE_NAME + "("
                 + FichajeEsquema.FichajeEntrada._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                FichajeEsquema.FichajeEntrada.ID + " TEXT NOT NULL," +
                 FichajeEsquema.FichajeEntrada.currentTime + " TEXT NOT NULL,"
-                + "UNIQUE (" + FichajeEsquema.FichajeEntrada.ID + "))");
+                + "UNIQUE (" + FichajeEsquema.FichajeEntrada.currentTime + "))");
 
-        //Contenedor de valores
-        ContentValues values = new ContentValues();
-
-        // Pares clave-valor
-        values.put(FichajeEsquema.FichajeEntrada.ID, "1");
-        values.put(FichajeEsquema.FichajeEntrada.currentTime, Calendar.getInstance().getTime().toString());
-
-        // Insertar...
-        db.insert(FichajeEsquema.FichajeEntrada.TABLE_NAME, null, values);
-
-        //insertar datos ficticios prueba inicial
-        mockData(db);
-
-    }
-
-    public long mockFichaje(SQLiteDatabase db, EntryFichaje entryFichaje) {
-        return db.insert(
-                FichajeEsquema.FichajeEntrada.TABLE_NAME,
-                null,
-                entryFichaje.toContentValues()
-        );
-    }
-
-
-    private void mockData(SQLiteDatabase sqLiteDatabase){
-        mockFichaje(sqLiteDatabase, new EntryFichaje("8:00", "0"));
-        mockFichaje(sqLiteDatabase, new EntryFichaje("9:00", "1"));
     }
 
     @Override
