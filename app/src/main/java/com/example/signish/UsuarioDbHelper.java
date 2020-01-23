@@ -43,7 +43,7 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
                 + UsuariosEsquema.UsuariosEntrada.DNI + " TEXT NOT NULL,"
                 + UsuariosEsquema.UsuariosEntrada.NOMBRE + " TEXT NOT NULL,"
                 + UsuariosEsquema.UsuariosEntrada.APELLIDO + " TEXT NOT NULL,"
-                + UsuariosEsquema.UsuariosEntrada.APELLIDO2 + " TEXT,"
+                + UsuariosEsquema.UsuariosEntrada.CONTRASENYA + " TEXT,"
                 + UsuariosEsquema.UsuariosEntrada.HIJOS + " TEXT NOT NULL,"
                 + UsuariosEsquema.UsuariosEntrada.DISCAPACIDAD + " TEXT NOT NULL,"
                 + UsuariosEsquema.UsuariosEntrada.ROL + " TEXT NOT NULL,"
@@ -59,7 +59,7 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
         values.put(UsuariosEsquema.UsuariosEntrada.DNI,"47554785G");
         values.put(UsuariosEsquema.UsuariosEntrada.NOMBRE, "Maite");
         values.put(UsuariosEsquema.UsuariosEntrada.APELLIDO, "Navarro");
-        values.put(UsuariosEsquema.UsuariosEntrada.APELLIDO2, "Abad");
+        values.put(UsuariosEsquema.UsuariosEntrada.CONTRASENYA, "1234");
         values.put(UsuariosEsquema.UsuariosEntrada.HIJOS, 0);
         values.put(UsuariosEsquema.UsuariosEntrada.DISCAPACIDAD, 0);
         values.put(UsuariosEsquema.UsuariosEntrada.ROL, "U"); //usuario o admin
@@ -84,8 +84,9 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
     }
 
     private void mockData(SQLiteDatabase sqLiteDatabase){
-        mocKUser(sqLiteDatabase,new User("47778541","Marc","Soler", "Nose","1","33","U","N"));
-        mocKUser(sqLiteDatabase,new User("X4788741D","Isha", "Noor", null, "0","0","A","N"));
+        mocKUser(sqLiteDatabase,new User("47778541","Marc","Soler", "4474","1","33","U","N"));
+        mocKUser(sqLiteDatabase,new User("X4788741D","Isha", "Noor", "4321", "0","0","A","N"));
+        mocKUser(sqLiteDatabase,new User("3610648L","Nuria", "Abad", "4321", "0","0","A","N"));
         Log.i("prueba", "post mockData");
     }
 

@@ -89,7 +89,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
 
 
-                try {
+
                     if (loginVistaModelo.userOk(textUser.getText().toString(), textPass.getText().toString())) {
                         Fragment fm = new FichajeFragment();
                         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -99,11 +99,7 @@ public class LoginFragment extends Fragment {
                     } else {
                         Toast.makeText(getContext(), "ERROR!! Wrong Password.", Toast.LENGTH_SHORT).show();
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
+
 
             }
         });

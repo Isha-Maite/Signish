@@ -23,7 +23,7 @@ public class LoginVistaModelo extends ViewModel {
 
     ///revisar mucho xD
 
-    public Boolean userOk(String checkUser, String checkPassword) throws IOException, ClassNotFoundException {
+    public Boolean userOk(String checkUser, String checkPassword) {
 
         return miRepositorio.userOk(checkUser,checkPassword);
 

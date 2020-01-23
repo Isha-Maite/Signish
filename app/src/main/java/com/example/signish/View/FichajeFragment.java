@@ -82,7 +82,7 @@ public class FichajeFragment extends Fragment {
         entryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Entry Button Pressed");
+                System.out.println(" \n Entry Button Pressed \n");
                 mViewModel.createEntry();
 
             }
@@ -91,7 +91,7 @@ public class FichajeFragment extends Fragment {
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Create Button Pressed");
+                System.out.println("\n Entry Button Pressed \n");
                 mViewModel.createEntry();
 
             }
@@ -100,7 +100,7 @@ public class FichajeFragment extends Fragment {
         loadRegistry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Exit Button Pressed");
+                System.out.println("\n Read Button Pressed \n");
                 try {
                     mViewModel.readEntry();
                 } catch (IOException e) {

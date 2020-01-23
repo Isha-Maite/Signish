@@ -13,7 +13,7 @@ public class UsuariosEsquema {
         public static final String DNI = "dni";
         public static final String NOMBRE = "nombre";
         public static final String APELLIDO = "apellido";
-        public static final String APELLIDO2 = "apellido2";
+        public static final String CONTRASENYA = "contrasenya";
         public static final String HIJOS = "hijos";
         public static final String DISCAPACIDAD = "discapacidad";
         public static final String ROL = "rol";

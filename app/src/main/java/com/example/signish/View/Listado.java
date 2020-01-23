@@ -3,6 +3,8 @@ package com.example.signish.View;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,8 +19,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.signish.Data.UsuariosEsquema;
 import com.example.signish.Model.Usuario;
 import com.example.signish.R;
+import com.example.signish.UsuarioDbHelper;
 import com.example.signish.ViewModel.ListadoViewModel;
 
 import java.util.ArrayList;
@@ -58,13 +62,26 @@ public class Listado extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         //carga de los usuarios para probar:
-        Usuario user1 = new Usuario ("Maitechu", "1234");
-        Usuario user2 = new Usuario ("Isha", "5678");
-        List<Usuario> listaUsuarios = new ArrayList<Usuario>();
-        listaUsuarios.add(user1);
-        listaUsuarios.add(user2);
-        Log.i("prueba","crear usuarios y array");
 
+        List<Usuario> listaUsuarios = new ArrayList<Usuario>();
+
+        UsuarioDbHelper admin = new UsuarioDbHelper(getContext());
+        SQLiteDatabase db = admin.getWritableDatabase();
+
+        Cursor cursorL = db.query(
+                UsuariosEsquema.UsuariosEntrada.TABLE_NAME,null,null,
+                null,null,null,null);
+
+        while(cursorL.moveToNext()){
+            Usuario u = new Usuario (
+                    cursorL.getString(cursorL.getColumnIndex(UsuariosEsquema.UsuariosEntrada.NOMBRE)),
+                    cursorL.getString(cursorL.getColumnIndex(UsuariosEsquema.UsuariosEntrada.APELLIDO))
+
+            );
+            listaUsuarios.add(u);
+        }
+
+        db.close();
 
 
         //El adapter es el traductor que recibe datos y los pinta en la pantalla
