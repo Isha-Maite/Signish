@@ -64,7 +64,12 @@ public class Repository {
             userSq = cursor.getString(cursor.getColumnIndex("nombre"));
             passSq = cursor.getString(cursor.getColumnIndex("contrasenya"));
             if(user.equals(userSq)&&password.equals(passSq)){
-                Log.i("lala","Login con QLIte");
+                if (user.equals("Maite")&&password.equals("1234")){
+                    Log.i("Admin", "Usuario es admin");
+                } else {
+                    Log.i("Worker", "Usuario no es admin");
+                }
+
 
                 cursor.close();
                 return true;

@@ -102,13 +102,19 @@ public class MainActivity extends AppCompatActivity {
             hilo1.execute("https://agora.xtec.cat/insjoandaustria/moodle/login/index.php");
         }
 
+        if(id==R.id.logout){
+            Toast.makeText(this,"Logout",Toast.LENGTH_SHORT).show();
+            Fragment fm = new LoginFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, fm);
+            transaction.commit();
+
+            makeMenuInvisible();
+        }
+
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,13 +129,7 @@ public class MainActivity extends AppCompatActivity {
         fragManager.beginTransaction().replace(R.id.fragment_container, new LoginFragment()).commit();
 
         createEntry();
-
         UsuarioDbHelper admin = new UsuarioDbHelper(this);
-
-        //UsuarioDbHelper admin = new UsuarioDbHelper(this,"Usuarios.db",null,1);
-        //guardar instancia para lectura de la bbdd en variable
-        //SQLiteDatabase db = admin.getReadableDatabase();
-
     }
 
 
@@ -215,12 +215,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void makeMenuInvisible(){
+        menu.getItem(1).setVisible(false);
+        menu.getItem(2).setVisible(false);
+        menu.getItem(3).setVisible(false);
+        menu.getItem(4).setVisible(false);
+        menu.getItem(5).setVisible(false);
+        menu.getItem(6).setVisible(false);
+    }
     public void makeMenuVisible(){
-        menu.getItem(0).setVisible(true);
         menu.getItem(1).setVisible(true);
         menu.getItem(2).setVisible(true);
         menu.getItem(3).setVisible(true);
         menu.getItem(4).setVisible(true);
+        menu.getItem(5).setVisible(true);
+        menu.getItem(6).setVisible(true);
 
     }
 }
