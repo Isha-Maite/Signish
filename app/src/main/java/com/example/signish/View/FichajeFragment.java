@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -39,9 +40,10 @@ public class FichajeFragment extends Fragment {
     Button loadRegistry;
     //TextView chnageText;
     Button internetButton;
+    MainActivity mainActivity;
 
     Button botonFichajes;
-
+    private Menu Menu;
 
 
     public static FichajeFragment newInstance() {
@@ -111,9 +113,13 @@ public class FichajeFragment extends Fragment {
         });
 
 
+        mainActivity = (MainActivity) getActivity();
+        mainActivity.makeMenuVisible();
         return ui_layout;
     }
 
+
+    
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

@@ -65,6 +65,7 @@ public class Repository {
             passSq = cursor.getString(cursor.getColumnIndex("contrasenya"));
             if(user.equals(userSq)&&password.equals(passSq)){
                 Log.i("lala","Login con QLIte");
+
                 cursor.close();
                 return true;
             }

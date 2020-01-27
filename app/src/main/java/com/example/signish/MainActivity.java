@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     Repository miRepositorio = Repository.get();
     String variableDatosGoogle ="";
 
+    Menu menu;
+
     private static final String FILE_NAME = "userFile.dat";
 
 
@@ -50,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu,menu);
+        this.menu = menu;
+
 
         return true;
     }
@@ -101,6 +105,10 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,5 +213,14 @@ public class MainActivity extends AppCompatActivity {
             transaction.commit();
 
         }
+    }
+
+    public void makeMenuVisible(){
+        menu.getItem(0).setVisible(true);
+        menu.getItem(1).setVisible(true);
+        menu.getItem(2).setVisible(true);
+        menu.getItem(3).setVisible(true);
+        menu.getItem(4).setVisible(true);
+
     }
 }
