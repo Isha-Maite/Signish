@@ -11,25 +11,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 
-import com.example.signish.Model.Fichaje;
 import com.example.signish.Model.Usuario;
+import com.example.signish.View.recieveFeedback;
 import com.example.signish.View.Feedback_Messages;
 import com.example.signish.View.FichajeFragment;
 import com.example.signish.View.InternetView;
-import com.example.signish.View.Listado;
 import com.example.signish.View.LoginFragment;
 
 import java.io.FileNotFoundException;
@@ -88,12 +83,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(id==R.id.menu_list){
-            Toast.makeText(this,"List",Toast.LENGTH_SHORT).show();
-            Fragment fm = new Listado();
+            Toast.makeText(this,"Recieve Message",Toast.LENGTH_SHORT).show();
+            Fragment fm = new recieveFeedback();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragment_container, fm);
             transaction.commit();
         }
+
+
 
         if(id==R.id.menu_intranet){
             Toast.makeText(this,"Intranet",Toast.LENGTH_SHORT).show();
