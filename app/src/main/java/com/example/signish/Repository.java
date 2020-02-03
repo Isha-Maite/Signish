@@ -8,7 +8,10 @@ import android.util.Log;
 
 import com.example.signish.Data.FichajeEsquema;
 import com.example.signish.Model.Fichaje;
+import com.example.signish.Model.Mensaje;
 import com.example.signish.Model.Usuario;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.EOFException;
 import java.io.File;
@@ -61,7 +64,13 @@ public class Repository {
             userSq = cursor.getString(cursor.getColumnIndex("nombre"));
             passSq = cursor.getString(cursor.getColumnIndex("contrasenya"));
             if(user.equals(userSq)&&password.equals(passSq)){
-                Log.i("lala","Login con QLIte");
+                if (user.equals("Maite")&&password.equals("1234")){
+                    Log.i("Admin", "Usuario es admin");
+                } else {
+                    Log.i("Worker", "Usuario no es admin");
+                }
+
+
                 cursor.close();
                 return true;
             }
@@ -107,6 +116,15 @@ public class Repository {
             System.out.print("\n" + currentimeSql + "\n");
         } cursor.close();
 
+    }
+
+    public void WriteMsgFirebase(String msg){
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference msg_reference = db.child("feedbackMessages").child("mensajes").push();
+        msg_reference.setValue(new Mensaje("usuario inventado",
+                "pVBEOgINbVOGdkne7Sjhg3ycW6h2", msg));
+        db.child("feedbackMessages").child("usuarios").child("pVBEOgINbVOGdkne7Sjhg3ycW6h2").child("mensaje")
+                .setValue(msg_reference.getKey());
     }
 
 

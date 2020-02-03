@@ -11,24 +11,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 
-import com.example.signish.Model.Fichaje;
 import com.example.signish.Model.Usuario;
+import com.example.signish.View.recieveFeedback;
+import com.example.signish.View.Feedback_Messages;
 import com.example.signish.View.FichajeFragment;
 import com.example.signish.View.InternetView;
-import com.example.signish.View.Listado;
 import com.example.signish.View.LoginFragment;
 
 import java.io.FileNotFoundException;
@@ -42,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     Repository miRepositorio = Repository.get();
     String variableDatosGoogle ="";
 
+    Menu menu;
+
     private static final String FILE_NAME = "userFile.dat";
 
 
@@ -49,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu,menu);
+        this.menu = menu;
+
 
         return true;
     }
@@ -63,6 +63,16 @@ public class MainActivity extends AppCompatActivity {
             fragManager.beginTransaction().replace(R.id.fragment_container, new LoginFragment()).commit();
         }
 
+        if(id==R.id.menu_feedback){
+            Toast.makeText(this,"FeedBack",Toast.LENGTH_SHORT).show();
+            Fragment fm = new Feedback_Messages();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, fm);
+            transaction.commit();
+
+
+        }
+
         if(id==R.id.menu_in){
             Toast.makeText(this,"Clock in",Toast.LENGTH_SHORT).show();
             Fragment fm = new FichajeFragment();
@@ -73,18 +83,30 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(id==R.id.menu_list){
-            Toast.makeText(this,"List",Toast.LENGTH_SHORT).show();
-            Fragment fm = new Listado();
+            Toast.makeText(this,"Recieve Message",Toast.LENGTH_SHORT).show();
+            Fragment fm = new recieveFeedback();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragment_container, fm);
             transaction.commit();
         }
+
+
 
         if(id==R.id.menu_intranet){
             Toast.makeText(this,"Intranet",Toast.LENGTH_SHORT).show();
 
             Hilo hilo1 = new Hilo();
             hilo1.execute("https://agora.xtec.cat/insjoandaustria/moodle/login/index.php");
+        }
+
+        if(id==R.id.logout){
+            Toast.makeText(this,"Logout",Toast.LENGTH_SHORT).show();
+            Fragment fm = new LoginFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, fm);
+            transaction.commit();
+
+            makeMenuInvisible();
         }
 
 
@@ -104,13 +126,7 @@ public class MainActivity extends AppCompatActivity {
         fragManager.beginTransaction().replace(R.id.fragment_container, new LoginFragment()).commit();
 
         createEntry();
-
         UsuarioDbHelper admin = new UsuarioDbHelper(this);
-
-        //UsuarioDbHelper admin = new UsuarioDbHelper(this,"Usuarios.db",null,1);
-        //guardar instancia para lectura de la bbdd en variable
-        //SQLiteDatabase db = admin.getReadableDatabase();
-
     }
 
 
@@ -194,5 +210,23 @@ public class MainActivity extends AppCompatActivity {
             transaction.commit();
 
         }
+    }
+
+    public void makeMenuInvisible(){
+        menu.getItem(1).setVisible(false);
+        menu.getItem(2).setVisible(false);
+        menu.getItem(3).setVisible(false);
+        menu.getItem(4).setVisible(false);
+        menu.getItem(5).setVisible(false);
+        menu.getItem(6).setVisible(false);
+    }
+    public void makeMenuVisible(){
+        menu.getItem(1).setVisible(true);
+        menu.getItem(2).setVisible(true);
+        menu.getItem(3).setVisible(true);
+        menu.getItem(4).setVisible(true);
+        menu.getItem(5).setVisible(true);
+        menu.getItem(6).setVisible(true);
+
     }
 }
