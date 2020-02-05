@@ -20,6 +20,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -125,6 +129,52 @@ public class Repository {
                 "pVBEOgINbVOGdkne7Sjhg3ycW6h2", msg));
         db.child("feedbackMessages").child("usuarios").child("pVBEOgINbVOGdkne7Sjhg3ycW6h2").child("mensaje")
                 .setValue(msg_reference.getKey());
+    }
+
+    Thread connectPostgres = new Thread(){
+        public void run(){
+            Connection conn = null;
+            try{
+                Class.forName("org.postgresql.Driver");
+                conn = DriverManager.getConnection("jdbc:postgresql://192.168.0.22/", "angela", "ruizrobles");
+
+                Statement st = conn.createStatement();
+
+                st.execute("CREATE TABLE TRYtry"
+                        + "("
+                        + FichajeEsquema.FichajeEntrada._ID
+                        + " INTEGER PRIMARY KEY,"
+                        +  FichajeEsquema.FichajeEntrada.currentTime + " TEXT NOT NULL,"
+                        + "UNIQUE (" + FichajeEsquema.FichajeEntrada.currentTime + "))");
+
+            }catch (SQLException e){
+                Log.i("Exception", "----------- Ha Fallado SQL -----------------");
+            }
+            catch (ClassNotFoundException c){
+                Log.i("Exception", "----------- No se encuentra classe -----------------");
+
+            }
+            finally {
+                try {
+                    conn.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    };
+
+    public void createFichajePostgres(){
+
+        connectPostgres.start();
+        if (connectPostgres.isAlive()){
+            Log.i("Connection", "Ha podido Connectar");
+        } else {
+            Log.i("Connection failed", "No ha podido connectar");
+        }
+
+
     }
 
 

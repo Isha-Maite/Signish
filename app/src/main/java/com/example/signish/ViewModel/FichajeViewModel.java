@@ -22,6 +22,10 @@ public class FichajeViewModel extends ViewModel {
         miRepositorio.createEntry();
     }
 
+    public void createEntryInPostgres(){
+        miRepositorio.createFichajePostgres();
+    }
+
     public void readEntry() throws IOException {
         miRepositorio.readEntry();
         //return miRepositorio.readEntry();

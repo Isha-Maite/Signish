@@ -85,7 +85,8 @@ public class FichajeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 System.out.println(" \n Entry Button Pressed \n");
-                mViewModel.createEntry();
+                //mViewModel.createEntry();
+                mViewModel.createEntryInPostgres();
 
             }
         });
@@ -94,7 +95,7 @@ public class FichajeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 System.out.println("\n Entry Button Pressed \n");
-                mViewModel.createEntry();
+                //mViewModel.createEntry();
 
             }
         });
@@ -111,6 +112,7 @@ public class FichajeFragment extends Fragment {
 
             }
         });
+
 
 
         mainActivity = (MainActivity) getActivity();
