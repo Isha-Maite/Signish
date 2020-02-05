@@ -75,7 +75,7 @@ public class Repository {
     /*método para guardar fichajes, modificado para que si el fichero existe no añada la cabecera,
     Una cabecera que se genera sola en el fichero.
     Se sobreescribe el método writeStreamHeader*/
-    public void createEntry() {
+    /*public void createEntry() {
 
         FichajeDbHelper admin = new FichajeDbHelper(context);
 
@@ -91,7 +91,7 @@ public class Repository {
 
         Log.i("Fichaje", "Ha creado Entrada");
 
-    }
+    }*/
 
 
     public void readEntry() throws IOException {

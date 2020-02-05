@@ -18,9 +18,9 @@ public class FichajeViewModel extends ViewModel {
         miRepositorio.setContext(context);
     }
 
-    public void createEntry() {
+    /*public void createEntry() {
         miRepositorio.createEntry();
-    }
+    }*/
 
     public void readEntry() throws IOException {
         miRepositorio.readEntry();

@@ -4,32 +4,23 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.signish.MainActivity;
+import com.example.signish.Data.FichajeLab;
+import com.example.signish.Model.Fichaje;
+import com.example.signish.RoomFicha;
 import com.example.signish.ViewModel.FichajeViewModel;
 import com.example.signish.R;
-
-import java.io.BufferedReader;
-import java.io.EOFException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
+import java.util.List;
+
 
 public class FichajeFragment extends Fragment {
 
@@ -37,12 +28,10 @@ public class FichajeFragment extends Fragment {
     Button entryButton;
     Button exitButton;
     Button loadRegistry;
-    //TextView chnageText;
-    Button internetButton;
-
     Button botonFichajes;
 
-
+    private Context context;
+    private FichajeLab mFichajeLab;
 
     public static FichajeFragment newInstance() {
         return new FichajeFragment();
@@ -62,7 +51,6 @@ public class FichajeFragment extends Fragment {
         entryButton = ui_layout.findViewById(R.id.button);
         exitButton = ui_layout.findViewById(R.id.button2);
         loadRegistry = ui_layout.findViewById(R.id.button3);
-        //chnageText = ui_layout.findViewById(R.id.textView2);
         botonFichajes = ui_layout.findViewById(R.id.verFichajes);
 
 
@@ -83,7 +71,9 @@ public class FichajeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 System.out.println(" \n Entry Button Pressed \n");
-                mViewModel.createEntry();
+                mFichajeLab = FichajeLab.get(context);
+                List<RoomFicha>marcatges = mFichajeLab.getMarcatges();
+                //mViewModel.createEntry();
 
             }
         });
@@ -92,7 +82,7 @@ public class FichajeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 System.out.println("\n Entry Button Pressed \n");
-                mViewModel.createEntry();
+                //mViewModel.createEntry();
 
             }
         });
