@@ -140,12 +140,7 @@ public class Repository {
 
                 Statement st = conn.createStatement();
 
-                st.execute("CREATE TABLE TRYtry"
-                        + "("
-                        + FichajeEsquema.FichajeEntrada._ID
-                        + " INTEGER PRIMARY KEY,"
-                        +  FichajeEsquema.FichajeEntrada.currentTime + " TEXT NOT NULL,"
-                        + "UNIQUE (" + FichajeEsquema.FichajeEntrada.currentTime + "))");
+                st.execute(CREATE_POSTGRES);
 
             }catch (SQLException e){
                 Log.i("Exception", "----------- Ha Fallado SQL -----------------");
@@ -165,18 +160,25 @@ public class Repository {
 
     };
 
+    private static final String CREATE_POSTGRES = "CREATE TABLE IF NOT EXISTS FICHAJE"
+            + "("
+            +  FichajeEsquema.FichajeEntrada.currentTime + " TEXT NOT NULL,"
+            + "UNIQUE (" + FichajeEsquema.FichajeEntrada.currentTime + "))";
+
+    private static String INSERT_POSTGRES = "";
+
     public void createFichajePostgres(){
 
         connectPostgres.start();
         if (connectPostgres.isAlive()){
             Log.i("Connection", "Ha podido Connectar");
         } else {
+
             Log.i("Connection failed", "No ha podido connectar");
         }
 
 
     }
-
 
     public String currentTime() {
         Calendar cal = Calendar.getInstance();

@@ -22,6 +22,7 @@ public class ConnectionPostgres extends AsyncTask<Void,Integer,Boolean> {
                 Log.i("funciona", "Postgres");
             }
         } catch (NoClassDefFoundError e){
+
             Log.e("Definicion de clase",e.getMessage());
         } catch (ClassNotFoundException e) {
             Log.e("Clase no encontrada",e.getMessage());
