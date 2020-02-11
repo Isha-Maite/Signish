@@ -1,5 +1,7 @@
 package com.example.signish;
 
+import java.text.SimpleDateFormat;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -19,7 +21,7 @@ public class RoomFicha {
 
     //Esta anotación se utiliza para definir una columna
     @ColumnInfo(name = "contenido")
-    private String mMarcatge;
+    private SimpleDateFormat mMarcatge;
 
     public RoomFicha() {
         mId = "Maite";
@@ -34,11 +36,11 @@ public class RoomFicha {
         mId = id;
     }
 
-    public String getMarcatge() {
+    public SimpleDateFormat getMarcatge() {
         return mMarcatge;
     }
 
-    public void setMarcatge(String marcatge) {
+    public void setMarcatge(SimpleDateFormat marcatge) {
         mMarcatge = marcatge;
     }
 }

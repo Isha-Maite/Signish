@@ -13,12 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.signish.Data.FichajeEsquema;
 import com.example.signish.Data.FichajeLab;
 import com.example.signish.Model.Fichaje;
 import com.example.signish.RoomFicha;
 import com.example.signish.ViewModel.FichajeViewModel;
 import com.example.signish.R;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -30,8 +32,9 @@ public class FichajeFragment extends Fragment {
     Button loadRegistry;
     Button botonFichajes;
 
-    private Context context;
     private FichajeLab mFichajeLab;
+    private RoomFicha mFicha;
+
 
     public static FichajeFragment newInstance() {
         return new FichajeFragment();
@@ -71,8 +74,15 @@ public class FichajeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 System.out.println(" \n Entry Button Pressed \n");
-                mFichajeLab = FichajeLab.get(context);
+
+
+                //mViewModel.guardar();
+
+                mFichajeLab = FichajeLab.get(getContext());
                 List<RoomFicha>marcatges = mFichajeLab.getMarcatges();
+
+                guardar();
+
                 //mViewModel.createEntry();
 
             }
@@ -111,7 +121,11 @@ public class FichajeFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
+    public void guardar(){
 
+        mFichajeLab.addMarcatge(mFicha);
+
+    }
 
 
 }

@@ -25,7 +25,7 @@ public class FichajeLab {
         mFichaDao = database.getFichaDao();
     }
 
-        public static FichajeLab get(Context context){
+        public static FichajeLab get (Context context){
             if(sFichajeLab == null){
                 sFichajeLab = new FichajeLab(context);
             }
@@ -42,6 +42,14 @@ public class FichajeLab {
 
         public void addMarcatge(RoomFicha marca){
             mFichaDao.addMarcatge(marca);
+        }
+
+        public void updateMarcatge(RoomFicha marca){
+        mFichaDao.updateMarcatge(marca);
+        }
+
+        public void deleteMarcatge(RoomFicha marca){
+        mFichaDao.deleteMarcatge(marca);
         }
 
 }

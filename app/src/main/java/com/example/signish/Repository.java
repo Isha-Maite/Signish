@@ -93,6 +93,13 @@ public class Repository {
 
     }*/
 
+    public void guardar(){
+
+        String marcatge = Calendar.getInstance().getTime().toString();
+
+
+    }
+
 
     public void readEntry() throws IOException {
 
