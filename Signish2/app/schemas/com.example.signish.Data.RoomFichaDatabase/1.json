@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c0aa9ee0b7308abf8b1e4029195168f9",
+    "identityHash": "c44736bb6cbab58ed6f4952e88bc7e0d",
     "entities": [
       {
         "tableName": "Marcatge",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mId` TEXT NOT NULL, `contenido` TEXT, PRIMARY KEY(`mId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mId` TEXT NOT NULL, `contenido` TEXT)",
         "fields": [
           {
             "fieldPath": "mId",
@@ -22,9 +22,7 @@
           }
         ],
         "primaryKey": {
-          "columnNames": [
-            "mId"
-          ],
+          "columnNames": [],
           "autoGenerate": false
         },
         "indices": [],
@@ -33,7 +31,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"c0aa9ee0b7308abf8b1e4029195168f9\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"c44736bb6cbab58ed6f4952e88bc7e0d\")"
     ]
   }
 }

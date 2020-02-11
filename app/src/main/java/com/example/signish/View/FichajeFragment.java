@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.signish.Data.FichajeEsquema;
 import com.example.signish.Data.FichajeLab;
@@ -20,7 +21,9 @@ import com.example.signish.RoomFicha;
 import com.example.signish.ViewModel.FichajeViewModel;
 import com.example.signish.R;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -122,10 +125,22 @@ public class FichajeFragment extends Fragment {
     }
 
     public void guardar(){
+        String dateFicha = Calendar.getInstance().getTime().toString();
 
-        mFichajeLab.addMarcatge(mFicha);
+
+        if(mFicha == null){
+            mFicha = new RoomFicha();
+            mFicha.setMarcatge(dateFicha);
+            mFichajeLab.addMarcatge(mFicha);
+            Toast.makeText(getContext(),"Fichaje OK",Toast.LENGTH_SHORT).show();
+        } else {
+            mFicha.setMarcatge(dateFicha);
+            mFichajeLab.addMarcatge(mFicha);
+            Toast.makeText(getContext(),"Fichaje OK else",Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     }
 
 
-}
