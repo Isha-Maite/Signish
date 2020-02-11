@@ -25,6 +25,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 
 public class Repository {
@@ -131,53 +132,55 @@ public class Repository {
                 .setValue(msg_reference.getKey());
     }
 
-    Thread connectPostgres = new Thread(){
-        public void run(){
-            Connection conn = null;
-            try{
-                Class.forName("org.postgresql.Driver");
-                conn = DriverManager.getConnection("jdbc:postgresql://192.168.0.22/", "angela", "ruizrobles");
+    public Thread connectionWithPostgres(){
+        Thread connectPostgres = new Thread(){
+            public void run(){
+                Connection conn = null;
+                try{
+                    Class.forName("org.postgresql.Driver");
+                    conn = DriverManager.getConnection("jdbc:postgresql://192.168.0.22/", "angela", "ruizrobles");
 
-                Statement st = conn.createStatement();
+                    Statement st = conn.createStatement();
 
-                st.execute(CREATE_POSTGRES);
+                    st.execute(CREATE_POSTGRES);
+                    int row = st.executeUpdate(generateInsert(currentTime()));
 
-            }catch (SQLException e){
-                Log.i("Exception", "----------- Ha Fallado SQL -----------------");
-            }
-            catch (ClassNotFoundException c){
-                Log.i("Exception", "----------- No se encuentra classe -----------------");
+                    System.out.println(row);
 
-            }
+
+                }catch (SQLException e){
+                    Log.i("Exception", "----------- Ha Fallado SQL -----------------");
+                }
+                catch (ClassNotFoundException c){
+                    Log.i("Exception", "----------- No se encuentra classe -----------------");
+
+                }
             finally {
                 try {
                     conn.close();
                 }catch (SQLException e){
                     e.printStackTrace();
-                }
+              }
             }
-        }
+            }
 
-    };
+        };
+        return connectPostgres;
+    }
+
 
     private static final String CREATE_POSTGRES = "CREATE TABLE IF NOT EXISTS FICHAJE"
             + "("
-            +  FichajeEsquema.FichajeEntrada.currentTime + " TEXT NOT NULL,"
-            + "UNIQUE (" + FichajeEsquema.FichajeEntrada.currentTime + "))";
+            +  "Entrada" + " TEXT NOT NULL,"
+            + "UNIQUE (" + "Entrada" + "))";
 
-    private static String INSERT_POSTGRES = "";
+    private static String generateInsert(String entrada) {
+        return "INSERT INTO Fichaje (entrada) " +
+                "VALUES ('" + entrada + "')";
+    }
 
     public void createFichajePostgres(){
-
-        connectPostgres.start();
-        if (connectPostgres.isAlive()){
-            Log.i("Connection", "Ha podido Connectar");
-        } else {
-
-            Log.i("Connection failed", "No ha podido connectar");
-        }
-
-
+        connectionWithPostgres().start();
     }
 
     public String currentTime() {
