@@ -32,14 +32,9 @@ public class FichajeLab {
             return sFichajeLab;
         }
 
-        public List<RoomFicha> getMarcatgeEntrada(){
-            return mFichaDao.getMarcatgeEntrada();
+        public List<RoomFicha> getMarcatges(){
+            return mFichaDao.getMarcatges();
         }
-
-        public List<RoomFicha> getMarcatgeSalida(){
-            return mFichaDao.getMarcatgeSalida();
-        }
-
 
         public void addMarcatge(RoomFicha marca){
             mFichaDao.addMarcatge(marca);

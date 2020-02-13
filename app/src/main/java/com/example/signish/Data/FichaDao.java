@@ -14,17 +14,8 @@ import androidx.room.Update;
 @Dao
 public interface FichaDao {
 
-    /*@Query("SELECT*FROM Marcatge")
+    @Query("SELECT * FROM Marcatge")
     List<RoomFicha> getMarcatges();
-
-    @Query("SELECT * FROM Marcatge WHERE mId LIKE :uuid")
-    RoomFicha getMarcatge(String uuid);*/
-
-    @Query("SELECT * FROM Marcatge")
-    List<RoomFicha> getMarcatgeEntrada();
-
-    @Query("SELECT * FROM Marcatge")
-    List<RoomFicha> getMarcatgeSalida();
 
     @Insert
     void addMarcatge(RoomFicha marca);

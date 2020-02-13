@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import com.example.signish.Model.RoomFicha;
 import com.example.signish.ViewModel.FichajeViewModel;
 import com.example.signish.R;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
@@ -111,7 +114,9 @@ public class FichajeFragment extends Fragment {
     }
 
     public void guardar(String accion){
-        String dateFicha = Calendar.getInstance().getTime().toString();
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        String dateFicha = fmt.format(Calendar.getInstance().getTime());
         mFichajeLab = FichajeLab.get(getContext());
 
         if(mFicha == null){

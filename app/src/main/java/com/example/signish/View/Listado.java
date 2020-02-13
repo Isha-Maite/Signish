@@ -57,7 +57,7 @@ public class Listado extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         mFichajeLab = FichajeLab.get(getContext());
-        List<RoomFicha> listadoMarcatges = mFichajeLab.getMarcatgeEntrada();
+        List<RoomFicha> listadoMarcatges = mFichajeLab.getMarcatges();
         //El adapter es el traductor que recibe datos y los pinta en la pantalla
         userAdapter = new UserAdapter(listadoMarcatges);
 
