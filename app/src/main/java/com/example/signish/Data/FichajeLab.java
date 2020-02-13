@@ -4,7 +4,7 @@ package com.example.signish.Data;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
-import com.example.signish.RoomFicha;
+import com.example.signish.Model.RoomFicha;
 
 import java.util.List;
 
@@ -32,13 +32,14 @@ public class FichajeLab {
             return sFichajeLab;
         }
 
-        public List<RoomFicha> getMarcatges(){
-            return mFichaDao.getMarcatges();
+        public List<RoomFicha> getMarcatgeEntrada(){
+            return mFichaDao.getMarcatgeEntrada();
         }
 
-        public RoomFicha getMarcatge(String id){
-            return mFichaDao.getMarcatge(id);
+        public List<RoomFicha> getMarcatgeSalida(){
+            return mFichaDao.getMarcatgeSalida();
         }
+
 
         public void addMarcatge(RoomFicha marca){
             mFichaDao.addMarcatge(marca);

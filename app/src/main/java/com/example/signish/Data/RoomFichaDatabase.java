@@ -1,6 +1,6 @@
 package com.example.signish.Data;
 
-import com.example.signish.RoomFicha;
+import com.example.signish.Model.RoomFicha;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;

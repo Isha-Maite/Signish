@@ -3,7 +3,6 @@ package com.example.signish.View;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,16 +13,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.signish.Data.FichajeEsquema;
 import com.example.signish.Data.FichajeLab;
-import com.example.signish.Model.Fichaje;
-import com.example.signish.RoomFicha;
+import com.example.signish.Model.RoomFicha;
 import com.example.signish.ViewModel.FichajeViewModel;
 import com.example.signish.R;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 
@@ -77,26 +72,17 @@ public class FichajeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 System.out.println(" \n Entry Button Pressed \n");
-
-
-                //mViewModel.guardar();
-
-                mFichajeLab = FichajeLab.get(getContext());
-                List<RoomFicha>marcatges = mFichajeLab.getMarcatges();
-
-                guardar();
-
-                //mViewModel.createEntry();
-
+                String accion= "entrada";
+                guardar(accion);
             }
         });
 
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String accion= "salida";
                 System.out.println("\n Entry Button Pressed \n");
-                //mViewModel.createEntry();
-
+                guardar(accion);
             }
         });
 
@@ -124,20 +110,33 @@ public class FichajeFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
-    public void guardar(){
+    public void guardar(String accion){
         String dateFicha = Calendar.getInstance().getTime().toString();
-
+        mFichajeLab = FichajeLab.get(getContext());
 
         if(mFicha == null){
             mFicha = new RoomFicha();
-            mFicha.setMarcatge(dateFicha);
-            mFichajeLab.addMarcatge(mFicha);
+            if(accion == "entrada"){
+                mFicha.setMarcatgeEntrada(dateFicha);
+                mFichajeLab.addMarcatge(mFicha);
+            } else {
+                mFicha.setMarcatgeSalida(dateFicha);
+                mFichajeLab.addMarcatge(mFicha);
+            }
+
             Toast.makeText(getContext(),"Fichaje OK",Toast.LENGTH_SHORT).show();
         } else {
-            mFicha.setMarcatge(dateFicha);
-            mFichajeLab.addMarcatge(mFicha);
+            if(accion == "entrada"){
+                mFicha.setMarcatgeEntrada(dateFicha);
+                mFichajeLab.addMarcatge(mFicha);
+            } else {
+                mFicha.setMarcatgeSalida(dateFicha);
+                mFichajeLab.addMarcatge(mFicha);
+            }
             Toast.makeText(getContext(),"Fichaje OK else",Toast.LENGTH_SHORT).show();
         }
+        mFicha.setMarcatgeEntrada(null);
+        mFicha.setMarcatgeSalida(null);
     }
 
 
