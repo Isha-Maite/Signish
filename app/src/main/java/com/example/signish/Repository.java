@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.signish.Data.FichajeEsquema;
+import com.example.signish.Model.Fichaje;
 import com.example.signish.Model.Mensaje;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -15,10 +16,14 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class Repository {
 
@@ -125,6 +130,10 @@ public class Repository {
                 .setValue(msg_reference.getKey());
     }
 
+    List<Fichaje> fichajes = new ArrayList<>();
+
+    String postgrs_select = "Select * from Fichaje";
+
     public Thread createEntryPostgres(){
         Thread entryPostgres = new Thread(){
             public void run(){
@@ -138,6 +147,25 @@ public class Repository {
                     int row =  st.executeUpdate("INSERT INTO FICHAJE (entrada) " +
                             "VALUES ('" + currentTime() + "')");
                     System.out.println(row);
+
+                    PreparedStatement preparedStatement = conn.prepareStatement(postgrs_select);
+                    ResultSet resultSet = preparedStatement.executeQuery();
+
+                    while (resultSet.next()) {
+                        String entrada = resultSet.getString("entrada");
+                        String salida = resultSet.getString("salida");
+
+                        Fichaje obj = new Fichaje();
+
+                        obj.setEntrada(entrada);
+                        obj.setSalida(salida);
+
+                        fichajes.add(obj);
+                    }
+
+                    for (Fichaje fichaje : fichajes){
+                        System.out.println(fichaje.getEntrada());
+                    }
 
 
 
@@ -153,6 +181,7 @@ public class Repository {
         };
         return entryPostgres;
     }
+
 
     public Thread createExitPostgres(){
         Thread exitPostgres = new Thread(){
