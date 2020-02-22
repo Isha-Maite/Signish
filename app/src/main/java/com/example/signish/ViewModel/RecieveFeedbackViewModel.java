@@ -1,5 +1,6 @@
-package com.example.signish.Model;
+package com.example.signish.ViewModel;
 
+import com.example.signish.Model.Mensaje;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
