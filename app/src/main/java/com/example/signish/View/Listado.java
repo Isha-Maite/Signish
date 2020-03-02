@@ -2,9 +2,6 @@ package com.example.signish.View;
 
 import androidx.lifecycle.ViewModelProviders;
 
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,19 +10,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.signish.Data.UsuariosEsquema;
-import com.example.signish.Model.Usuario;
+import com.example.signish.Data.FichajeLab;
 import com.example.signish.R;
-import com.example.signish.UsuarioDbHelper;
+import com.example.signish.Model.RoomFicha;
 import com.example.signish.ViewModel.ListadoViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -41,6 +35,7 @@ public class Listado extends Fragment {
     private ListadoViewModel mViewModel;
 
     UserAdapter userAdapter;
+    private FichajeLab mFichajeLab;
 
     public Listado() {
     }
@@ -61,31 +56,10 @@ public class Listado extends Fragment {
         recyclerView = interfazListado.findViewById(R.id.noName);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        //carga de los usuarios para probar:
-
-        List<Usuario> listaUsuarios = new ArrayList<Usuario>();
-
-        UsuarioDbHelper admin = new UsuarioDbHelper(getContext());
-        SQLiteDatabase db = admin.getWritableDatabase();
-
-        Cursor cursorL = db.query(
-                UsuariosEsquema.UsuariosEntrada.TABLE_NAME,null,null,
-                null,null,null,null);
-
-        while(cursorL.moveToNext()){
-            Usuario u = new Usuario (
-                    cursorL.getString(cursorL.getColumnIndex(UsuariosEsquema.UsuariosEntrada.NOMBRE)),
-                    cursorL.getString(cursorL.getColumnIndex(UsuariosEsquema.UsuariosEntrada.APELLIDO))
-
-            );
-            listaUsuarios.add(u);
-        }
-
-        db.close();
-
-
+        mFichajeLab = FichajeLab.get(getContext());
+        List<RoomFicha> listadoMarcatges = mFichajeLab.getMarcatges();
         //El adapter es el traductor que recibe datos y los pinta en la pantalla
-        userAdapter = new UserAdapter(listaUsuarios);
+        userAdapter = new UserAdapter(listadoMarcatges);
 
         //añadir el adapter al recyclerView. Se genera como clase interna
         recyclerView.setAdapter(userAdapter);
@@ -103,10 +77,10 @@ public class Listado extends Fragment {
     public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
         // lista con los fichajes
-        List<Usuario> fichajes;
+        List<RoomFicha> fichajes;
 
 
-        public UserAdapter(List<Usuario> fichajes) {
+        public UserAdapter(List<RoomFicha> fichajes) {
             this.fichajes = fichajes;
         }
 
@@ -120,10 +94,17 @@ public class Listado extends Fragment {
         //Se encarga de pintar los datos
         @Override
         public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
-            Usuario usuario_fichado = fichajes.get(position);
+            RoomFicha usuario_fichado = fichajes.get(position);
+            if (usuario_fichado == null) {
+                return;
+            }
 
             holder.usuario.setText(usuario_fichado.getUsuario());
-
+            if (usuario_fichado.getMarcatgeEntrada() != null) {
+                holder.fichaje.setText("Entrada: " + usuario_fichado.getMarcatgeEntrada());
+            } else {
+                holder.fichaje.setText("Salida: " + usuario_fichado.getMarcatgeSalida());
+            }
         }
 
         @Override
@@ -136,13 +117,15 @@ public class Listado extends Fragment {
 
             //declarar variables
             TextView usuario;
+            TextView fichaje;
 
             public UserViewHolder(@NonNull View itemView) {
                 super(itemView);
 
                 //aquí poner lo que se tiene que mostrar (variable/id)
 
-                usuario = itemView.findViewById(R.id.TextFichaje);
+                usuario = itemView.findViewById(R.id.TextFichajeUsuario);
+                fichaje = itemView.findViewById(R.id.TextFichaje);
             }
         }
     }

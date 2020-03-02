@@ -87,7 +87,7 @@ public class Repository {
     /*método para guardar fichajeList, modificado para que si el fichero existe no añada la cabecera,
     Una cabecera que se genera sola en el fichero.
     Se sobreescribe el método writeStreamHeader*/
-    public void createEntry() {
+    /*public void createEntry() {
 
         FichajeDbHelper admin = new FichajeDbHelper(context);
 
@@ -102,6 +102,13 @@ public class Repository {
         db.insert(FichajeEsquema.FichajeEntrada.TABLE_NAME, null, values);
 
         Log.i("Fichaje", "Ha creado Entrada");
+
+    }*/
+
+    public void guardar(){
+
+        String marcatge = Calendar.getInstance().getTime().toString();
+
 
     }
 

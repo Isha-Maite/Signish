@@ -4,22 +4,27 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
-import com.example.signish.MainActivity;
+import com.example.signish.Data.FichajeLab;
+import com.example.signish.Model.RoomFicha;
 import com.example.signish.ViewModel.FichajeViewModel;
 import com.example.signish.R;
-
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
+
 
 public class FichajeFragment extends Fragment {
 
@@ -34,6 +39,8 @@ public class FichajeFragment extends Fragment {
     Button botonFichajes;
     private Menu Menu;
 
+    private FichajeLab mFichajeLab;
+    private RoomFicha mFicha;
 
     public static FichajeFragment newInstance() {
         return new FichajeFragment();
@@ -53,7 +60,6 @@ public class FichajeFragment extends Fragment {
         entryButton = ui_layout.findViewById(R.id.button);
         exitButton = ui_layout.findViewById(R.id.button2);
         loadRegistry = ui_layout.findViewById(R.id.button3);
-        //chnageText = ui_layout.findViewById(R.id.textView2);
         botonFichajes = ui_layout.findViewById(R.id.verFichajes);
 
 
@@ -77,6 +83,8 @@ public class FichajeFragment extends Fragment {
                 //mViewModel.createEntry();
                 mViewModel.createEntradaFichaje();
 
+                String accion= "entrada";
+                guardar(accion);
             }
         });
 
@@ -87,6 +95,9 @@ public class FichajeFragment extends Fragment {
                 mViewModel.createSalidaFichaje();
                 //mViewModel.createEntry();
 
+                String accion= "salida";
+                System.out.println("\n Entry Button Pressed \n");
+                guardar(accion);
             }
         });
 
@@ -119,7 +130,38 @@ public class FichajeFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
+    public void guardar(String accion){
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        String dateFicha = fmt.format(Calendar.getInstance().getTime());
+        mFichajeLab = FichajeLab.get(getContext());
+
+        if(mFicha == null){
+            mFicha = new RoomFicha();
+            if(accion == "entrada"){
+                mFicha.setMarcatgeEntrada(dateFicha);
+                mFichajeLab.addMarcatge(mFicha);
+            } else {
+                mFicha.setMarcatgeSalida(dateFicha);
+                mFichajeLab.addMarcatge(mFicha);
+            }
+
+            Toast.makeText(getContext(),"Fichaje OK",Toast.LENGTH_SHORT).show();
+        } else {
+            if(accion == "entrada"){
+                mFicha.setMarcatgeEntrada(dateFicha);
+                mFichajeLab.addMarcatge(mFicha);
+            } else {
+                mFicha.setMarcatgeSalida(dateFicha);
+                mFichajeLab.addMarcatge(mFicha);
+            }
+            Toast.makeText(getContext(),"Fichaje OK else",Toast.LENGTH_SHORT).show();
+        }
+        mFicha.setMarcatgeEntrada(null);
+        mFicha.setMarcatgeSalida(null);
+    }
 
 
+    }
 
-}
+
