@@ -3,8 +3,6 @@ package com.example.signish.View;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,21 +14,12 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.signish.MainActivity;
 import com.example.signish.ViewModel.FichajeViewModel;
 import com.example.signish.R;
 
-import java.io.BufferedReader;
-import java.io.EOFException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 
 public class FichajeFragment extends Fragment {
 
@@ -85,7 +74,8 @@ public class FichajeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 System.out.println(" \n Entry Button Pressed \n");
-                mViewModel.createEntry();
+                //mViewModel.createEntry();
+                mViewModel.createEntradaFichaje();
 
             }
         });
@@ -93,8 +83,9 @@ public class FichajeFragment extends Fragment {
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("\n Entry Button Pressed \n");
-                mViewModel.createEntry();
+                System.out.println("\n Exit Button Pressed \n");
+                mViewModel.createSalidaFichaje();
+                //mViewModel.createEntry();
 
             }
         });
@@ -111,6 +102,7 @@ public class FichajeFragment extends Fragment {
 
             }
         });
+
 
 
         mainActivity = (MainActivity) getActivity();

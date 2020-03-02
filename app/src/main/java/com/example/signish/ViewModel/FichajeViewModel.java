@@ -22,6 +22,14 @@ public class FichajeViewModel extends ViewModel {
         miRepositorio.createEntry();
     }
 
+    public void createEntradaFichaje(){
+        miRepositorio.createFichajeEntrada();
+    }
+
+    public void createSalidaFichaje(){
+        miRepositorio.createSalidaFichaje();
+    }
+
     public void readEntry() throws IOException {
         miRepositorio.readEntry();
         //return miRepositorio.readEntry();
