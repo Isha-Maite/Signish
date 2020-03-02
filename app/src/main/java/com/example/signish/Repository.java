@@ -144,15 +144,6 @@ public class Repository {
                     conn = DriverManager.getConnection("jdbc:postgresql://192.168.0.22/", "angela", "ruizrobles");
 
                     Statement st = conn.createStatement();
-
-//                    String insertEntrada = "INSERT INTO FICHAJE(ENTRADA) VALUES(?);";
-//                    PreparedStatement insertNewUser;
-//
-//                    insertNewUser = conn.prepareStatement(insertEntrada);
-//
-//                    insertNewUser.setString(1,currentTime());
-//                    insertNewUser.executeUpdate();
-
                     st.execute(CREATE_POSTGRES);
                     int row =  st.executeUpdate("INSERT INTO FICHAJE (entrada) " +
                             "VALUES ('" + currentTime() + "')");
@@ -170,13 +161,6 @@ public class Repository {
 
                         fichajeList.add(obj);
                     }
-
-                    for (Fichaje fichaje : fichajeList){
-                        selectedFichaje = fichaje;
-
-                        System.out.println("Entrada  " + fichaje.getEntrada());
-                    }
-
 
 
                 }catch (SQLException e){
@@ -275,35 +259,6 @@ public class Repository {
         return exitPostgres;
     }
 
-//    public Thread createTablePostgres(){
-//        Thread connectPostgres = new Thread(){
-//            public void run(){
-////                Connection conn = null;
-//                try{
-//
-//                    Statement st = conn.createStatement();
-//
-//                    st.execute(CREATE_POSTGRES);
-//                    int row =  st.executeUpdate("INSERT INTO FICHAJE (salida) " +
-//                            "VALUES ('" + currentTime() + "')");
-//                    System.out.println(row);
-//
-//
-//
-//                }catch (SQLException e){
-//                    Log.i("Exception", "----------- Ha Fallado SQL -----------------");
-//                } finally {
-//                    try {
-//                        conn.close();
-//                    }catch (SQLException e){
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//
-//        };
-//        return connectPostgres;
-//    }
 
 
     private static final String CREATE_POSTGRES = "CREATE TABLE IF NOT EXISTS FICHAJE"
@@ -312,17 +267,12 @@ public class Repository {
             +  "Salida TEXT,"
             + "UNIQUE (" + "Entrada" + "))";
 
-    private static String generarEntrada(String entrada) {
-        return "INSERT INTO Fichaje (entrada) " +
-                "VALUES ('" + entrada + "')";
-    }
-
     public void createFichajeEntrada(){
         createEntryPostgres().start();
     }
 
     public void createSalidaFichaje(){
-        updateTabla().start();
+        createExitPostgres().start();
     }
 
     public String currentTime() {
@@ -330,7 +280,6 @@ public class Repository {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(cal.getTime());
     }
-
 
 }
 
