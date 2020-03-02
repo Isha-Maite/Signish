@@ -4,17 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_purple"
+    android:background="@android:color/white"
     tools:context=".View.FichajeFragment">
 
     <EditText
         android:id="@+id/message"
         style="@android:style/Widget.EditText"
-        android:layout_width="271dp"
-        android:layout_height="129dp"
-        android:layout_marginStart="42dp"
+        android:layout_width="413dp"
+        android:layout_height="125dp"
         android:layout_marginTop="153dp"
-        android:layout_marginEnd="42dp"
         android:background="@color/colorPrimaryDark"
         android:ems="10"
         android:gravity="start|top"
@@ -42,6 +40,18 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/message" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="323dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="74dp"
+        android:text="Write a feedback message"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
