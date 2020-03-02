@@ -18,8 +18,20 @@ public class FichajeViewModel extends ViewModel {
         miRepositorio.setContext(context);
     }
 
-    public void createEntry() {
+    /*public void createEntry() {
         miRepositorio.createEntry();
+    }*/
+
+    public void guardar() {
+        miRepositorio.guardar();
+    }
+
+    public void createEntradaFichaje(){
+        miRepositorio.createFichajeEntrada();
+    }
+
+    public void createSalidaFichaje(){
+        miRepositorio.createSalidaFichaje();
     }
 
     public void readEntry() throws IOException {

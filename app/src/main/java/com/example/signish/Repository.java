@@ -9,19 +9,21 @@ import android.util.Log;
 import com.example.signish.Data.FichajeEsquema;
 import com.example.signish.Model.Fichaje;
 import com.example.signish.Model.Mensaje;
-import com.example.signish.Model.Usuario;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.EOFException;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class Repository {
 
@@ -29,6 +31,7 @@ public class Repository {
     private static Repository repositorio;
     private Context context;
     private File file = null;
+//    private static Connection conn;
 
     String userSq;
     String passSq;
@@ -81,10 +84,10 @@ public class Repository {
     }
 
 
-    /*método para guardar fichajes, modificado para que si el fichero existe no añada la cabecera,
+    /*método para guardar fichajeList, modificado para que si el fichero existe no añada la cabecera,
     Una cabecera que se genera sola en el fichero.
     Se sobreescribe el método writeStreamHeader*/
-    public void createEntry() {
+    /*public void createEntry() {
 
         FichajeDbHelper admin = new FichajeDbHelper(context);
 
@@ -99,6 +102,13 @@ public class Repository {
         db.insert(FichajeEsquema.FichajeEntrada.TABLE_NAME, null, values);
 
         Log.i("Fichaje", "Ha creado Entrada");
+
+    }*/
+
+    public void guardar(){
+
+        String marcatge = Calendar.getInstance().getTime().toString();
+
 
     }
 
@@ -127,13 +137,156 @@ public class Repository {
                 .setValue(msg_reference.getKey());
     }
 
+    List<Fichaje> fichajeList = new ArrayList<>();
+    private static Fichaje selectedFichaje;
+
+    String postgrs_select = "Select * from Fichaje";
+
+    public Thread createEntryPostgres(){
+        Thread entryPostgres = new Thread(){
+            public void run(){
+                Connection conn = null;
+                try{
+                    Class.forName("org.postgresql.Driver");
+                    conn = DriverManager.getConnection("jdbc:postgresql://192.168.0.22/", "angela", "ruizrobles");
+
+                    Statement st = conn.createStatement();
+                    st.execute(CREATE_POSTGRES);
+                    int row =  st.executeUpdate("INSERT INTO FICHAJE (entrada) " +
+                            "VALUES ('" + currentTime() + "')");
+                    System.out.println(row);
+
+                    PreparedStatement preparedStatement = conn.prepareStatement(postgrs_select);
+                    ResultSet resultSet = preparedStatement.executeQuery();
+
+                    while (resultSet.next()) {
+                        String entrada = resultSet.getString("entrada");
+
+                        Fichaje obj = new Fichaje();
+                        obj.setEntrada(entrada);
+
+
+                        fichajeList.add(obj);
+                    }
+
+
+                }catch (SQLException e){
+                    Log.i("Exception", "----------- Ha Fallado SQL -----------------");
+                }
+                catch (ClassNotFoundException c){
+                    Log.i("Exception", "----------- No se encuentra classe -----------------");
+
+                }
+            }
+
+        };
+        return entryPostgres;
+    }
+
+
+    public Thread createExitPostgres(){
+        Thread exitPostgres = new Thread(){
+            public void run(){
+                Connection conn = null;
+                try{
+                    Class.forName("org.postgresql.Driver");
+                    conn = DriverManager.getConnection("jdbc:postgresql://192.168.0.22/", "angela", "ruizrobles");
+
+                    Statement st = conn.createStatement();
+                    st.execute(CREATE_POSTGRES);
+                    int row =  st.executeUpdate("INSERT INTO FICHAJE (salida) " +
+                            "VALUES ('" + currentTime() + "')");
+                    System.out.println(row);
+
+
+
+                }catch (SQLException e){
+                    Log.i("Exception", "----------- Ha Fallado SQL -----------------");
+                }
+                catch (ClassNotFoundException c){
+                    Log.i("Exception", "----------- No se encuentra classe -----------------");
+
+                }
+            }
+
+        };
+        return exitPostgres;
+    }
+
+    public Thread updateTabla(){
+        Thread exitPostgres = new Thread(){
+            public void run(){
+                Connection conn = null;
+                try{
+                    Class.forName("org.postgresql.Driver");
+                    conn = DriverManager.getConnection("jdbc:postgresql://192.168.0.22/", "angela", "ruizrobles");
+
+                    Statement st = conn.createStatement();
+                    int row = st.executeUpdate("UPDATE FICHAJE SET ENTRADA='" + currentTime() + "' WHERE ENTRADA='" + selectedFichaje.getEntrada() + "'" );
+                    System.out.println(row);
+
+
+
+                }catch (SQLException e){
+                    Log.i("Exception", "----------- Ha Fallado SQL -----------------");
+                }
+                catch (ClassNotFoundException c){
+                    Log.i("Exception", "----------- No se encuentra classe -----------------");
+
+                }
+            }
+
+        };
+        return exitPostgres;
+    }
+
+    public Thread deleteTable(){
+        Thread exitPostgres = new Thread(){
+            public void run(){
+                Connection conn = null;
+                try{
+                    Class.forName("org.postgresql.Driver");
+                    conn = DriverManager.getConnection("jdbc:postgresql://192.168.0.22/", "angela", "ruizrobles");
+
+                    Statement st = conn.createStatement();
+                    int row = st.executeUpdate("DELETE FROM FICHAJE WHERE ENTRADA='" + selectedFichaje.getEntrada() + "'");
+
+
+
+                }catch (SQLException e){
+                    Log.i("Exception", "----------- Ha Fallado SQL -----------------");
+                }
+                catch (ClassNotFoundException c){
+                    Log.i("Exception", "----------- No se encuentra classe -----------------");
+
+                }
+            }
+
+        };
+        return exitPostgres;
+    }
+
+
+
+    private static final String CREATE_POSTGRES = "CREATE TABLE IF NOT EXISTS FICHAJE"
+            + "("
+            +  "Entrada" + " TEXT,"
+            +  "Salida TEXT,"
+            + "UNIQUE (" + "Entrada" + "))";
+
+    public void createFichajeEntrada(){
+        createEntryPostgres().start();
+    }
+
+    public void createSalidaFichaje(){
+        createExitPostgres().start();
+    }
 
     public String currentTime() {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(cal.getTime());
     }
-
 
 }
 

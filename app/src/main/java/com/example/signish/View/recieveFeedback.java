@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.signish.Model.Mensaje;
-import com.example.signish.Model.RecieveFeedbackViewModel;
+import com.example.signish.ViewModel.RecieveFeedbackViewModel;
 import com.example.signish.R;
 
 public class recieveFeedback extends Fragment {

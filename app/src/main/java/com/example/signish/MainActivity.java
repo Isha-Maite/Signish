@@ -69,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragment_container, fm);
             transaction.commit();
-
-
         }
 
         if(id==R.id.menu_in){
@@ -82,14 +80,13 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        if(id==R.id.menu_list){
+        if(id==R.id.recieveFeedback_menu){
             Toast.makeText(this,"Recieve Message",Toast.LENGTH_SHORT).show();
             Fragment fm = new recieveFeedback();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragment_container, fm);
             transaction.commit();
         }
-
 
 
         if(id==R.id.menu_intranet){
@@ -127,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
         createEntry();
         UsuarioDbHelper admin = new UsuarioDbHelper(this);
+//        miRepositorio.createFichajeEntrada();
     }
 
 
