@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_purple"
+    tools:context=".View.Pictures">
+
+
+    <Button
+        android:id="@+id/bttnCambiar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="46dp"
+        android:layout_marginBottom="100dp"
+        android:text="Cambiar foto"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bttnSubir"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/bttnSubir"
+        android:layout_width="128dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="46dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="96dp"
+        android:text="Subir Foto"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bttnCambiar" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="337dp"
+        android:layout_height="313dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="80dp"
+        android:src="@drawable/ficherlogo"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
