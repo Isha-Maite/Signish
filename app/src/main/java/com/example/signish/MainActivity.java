@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 
 import com.example.signish.Model.Usuario;
+import com.example.signish.View.Listado;
 import com.example.signish.View.recieveFeedback;
 import com.example.signish.View.Feedback_Messages;
 import com.example.signish.View.FichajeFragment;
@@ -74,6 +75,15 @@ public class MainActivity extends AppCompatActivity {
         if(id==R.id.menu_in){
             Toast.makeText(this,"Clock in",Toast.LENGTH_SHORT).show();
             Fragment fm = new FichajeFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, fm);
+            transaction.commit();
+
+        }
+
+        if(id==R.id.menu_list){
+            Toast.makeText(this,"Entries List",Toast.LENGTH_SHORT).show();
+            Fragment fm = new Listado();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragment_container, fm);
             transaction.commit();

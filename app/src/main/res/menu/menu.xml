@@ -9,7 +9,7 @@
         android:id="@+id/menu_in"
         android:visible="false"/>
 
-    <item android:title="List"
+    <item android:title="Entries List"
         android:id="@+id/menu_list"
         android:visible="false"/>
 
