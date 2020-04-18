@@ -1,5 +1,6 @@
 package com.example.signish.View;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -33,6 +34,7 @@ public class LoginFragment extends Fragment {
     //declarar variables, luego se le asignara el id
     EditText textUser, textPass;
     Button botonEntrar;
+    MediaPlayer mediaPlayer;
 
 
     //declarar variable del fichero vistamodelo
@@ -82,14 +84,18 @@ public class LoginFragment extends Fragment {
         textUser = interfazLogin.findViewById(R.id.textUser);
         textPass = interfazLogin.findViewById(R.id.textPass);
         botonEntrar = interfazLogin.findViewById(R.id.botonEntrar);
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.intro);
 
 
         botonEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                // Reproduce intro music
+                mediaPlayer.start();
+                mediaPlayer.setLooping(false);
 
-
+                // Temporary login: User = aa , Password = aa
                     if (loginVistaModelo.userOk(textUser.getText().toString(), textPass.getText().toString())) {
                         Fragment fm = new FichajeFragment();
                         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
