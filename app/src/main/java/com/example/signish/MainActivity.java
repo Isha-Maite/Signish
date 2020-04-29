@@ -35,7 +35,7 @@ import java.nio.charset.StandardCharsets;
 public class MainActivity extends AppCompatActivity {
 
     FragmentManager fragManager;
-    Repository miRepositorio = Repository.get();
+    Repository miRepositorio = Repository.get(getApplicationContext());
     String variableDatosGoogle ="";
 
     Menu menu;

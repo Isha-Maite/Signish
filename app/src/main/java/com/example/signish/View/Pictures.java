@@ -3,6 +3,8 @@ package com.example.signish.View;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +19,8 @@ import android.widget.Button;
 
 import com.example.signish.R;
 import com.example.signish.ViewModel.PicturesViewModel;
+
+import static android.app.Activity.RESULT_OK;
 
 public class Pictures extends Fragment {
 
@@ -68,5 +72,37 @@ public class Pictures extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(PicturesViewModel.class);
         // TODO: Use the ViewModel
     }
+/*
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Bitmap bitmap = null;
+
+        if(requestCode == 10 && resultCode == RESULT_OK){
+
+            Uri uri;
+            uri = data.getData();
+
+            try{
+
+                bitmap = MediaStore.Images.Media
+                        .getBitmap(getContentResolver(), uri);
+
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        } else if (requestCode == 20 && resultCode == RESULT_OK){
+
+            bitmap = (Bitmap) data.getExtras().get("data");
+
+        }
+
+        if(bitmap != null){
+            imagen.setImageBitmap(bitmap);
+        }
+
+    }*/
 
 }

@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">Signish</string>
 
+    <!-- para poder escribir en el spinner, las opciones del desplegable-->
+
+    <string-array name="spinner_array">
+        <item>RRHH</item>
+        <item>ID</item>
+        <item>Administración</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
