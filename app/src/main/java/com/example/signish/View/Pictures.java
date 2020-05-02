@@ -1,5 +1,6 @@
 package com.example.signish.View;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
@@ -69,7 +70,7 @@ public class Pictures extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(PicturesViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(PicturesViewModel.class);
         // TODO: Use the ViewModel
     }
 /*

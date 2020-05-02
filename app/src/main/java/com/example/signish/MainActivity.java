@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 
 import com.example.signish.Model.Usuario;
+import com.example.signish.View.DirectorioFrag;
 import com.example.signish.View.recieveFeedback;
 import com.example.signish.View.Feedback_Messages;
 import com.example.signish.View.FichajeFragment;
@@ -35,7 +36,7 @@ import java.nio.charset.StandardCharsets;
 public class MainActivity extends AppCompatActivity {
 
     FragmentManager fragManager;
-    Repository miRepositorio = Repository.get(getApplicationContext());
+    Repository miRepositorio = Repository.getRepository();
     String variableDatosGoogle ="";
 
     Menu menu;
@@ -74,6 +75,15 @@ public class MainActivity extends AppCompatActivity {
         if(id==R.id.menu_in){
             Toast.makeText(this,"Clock in",Toast.LENGTH_SHORT).show();
             Fragment fm = new FichajeFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, fm);
+            transaction.commit();
+
+        }
+
+        if(id==R.id.menu_departamentos){
+            Toast.makeText(this,"Departamentos",Toast.LENGTH_SHORT).show();
+            Fragment fm = new DirectorioFrag();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragment_container, fm);
             transaction.commit();

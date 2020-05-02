@@ -1,5 +1,6 @@
 package com.example.signish.View;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -70,7 +71,7 @@ public class Listado extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(ListadoViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(ListadoViewModel.class);
         // TODO: Use the ViewModel
     }
 
