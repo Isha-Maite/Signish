@@ -13,11 +13,7 @@ import android.widget.TextView;
 import com.example.signish.R;
 import com.example.signish.ViewModel.DirectorioViewModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ContactoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class ContactoFragment extends Fragment {
 
     private DirectorioViewModel mViewModel;
@@ -47,7 +43,7 @@ public class ContactoFragment extends Fragment {
 
         //se coge la arraylist de directorioViewModel
 
-        cargar_datos_contacto(mViewModel.getContactPosition(posicion));
+        cargar_datos_contacto(mViewModel.getContactPosition(getArguments().getInt("POSICION")));
 
         //para que el contacto llegue, el vM
 
@@ -57,6 +53,6 @@ public class ContactoFragment extends Fragment {
     public void cargar_datos_contacto(User user){
         nom.setText(user.getNombre()+""+user.getApellido());
         email.setText(user.getEmail());
-        departamento.setText("");
+        departamento.setText(getArguments().getString("DEPARTAMENTO"));
     }
 }

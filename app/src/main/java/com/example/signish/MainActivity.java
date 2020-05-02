@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
         createEntry();
         UsuarioDbHelper admin = new UsuarioDbHelper(this);
-//        miRepositorio.createFichajeEntrada();
+        miRepositorio.createFichajeEntrada();
     }
 
 
