@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModel;
 
 public class FichajeViewModel extends ViewModel {
 
-    Repository miRepositorio = Repository.get(getApplicationContext());
+    Repository miRepositorio = Repository.getRepository();
 
 
     public void setContext(Context context) {

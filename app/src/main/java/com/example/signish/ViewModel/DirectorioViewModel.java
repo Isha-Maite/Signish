@@ -45,5 +45,10 @@ public class DirectorioViewModel extends ViewModel {
         return liveData_lista;
     }
 
+    public User getContactPosition(int posicion){
+
+        return lista_user_dep.get(posicion);
+    }
+
 }
 

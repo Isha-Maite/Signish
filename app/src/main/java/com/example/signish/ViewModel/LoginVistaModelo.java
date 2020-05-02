@@ -12,7 +12,7 @@ public class LoginVistaModelo extends ViewModel {
 
     //Variables y atributos
 
-    Repository miRepositorio = Repository.get(getApplicationContext());
+    Repository miRepositorio = Repository.getRepository();
 
     public void setContext(Context context){
         miRepositorio.setContext(context);

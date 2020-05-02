@@ -9,7 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class FeedbackMessagesViewModel extends ViewModel {
-    Repository miRepositorio = Repository.get(getApplicationContext());
+    Repository miRepositorio = Repository.getRepository();
 
     private MutableLiveData<String> mText;
 

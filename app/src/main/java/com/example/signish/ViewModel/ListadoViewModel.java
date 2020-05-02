@@ -8,9 +8,8 @@ import androidx.lifecycle.ViewModel;
 
 public class ListadoViewModel extends ViewModel {
 
-    //TODO MIRAR LLAMADA AL REPO
-    /* HA DEJADO DE GUSTARLE LA LLAMADA AL REPOSITORIO
-    Repository miRepositorio = Repository.get(getApplicationContext());
+
+    Repository miRepositorio = Repository.getRepository();
 
     public void setContext(Context context){
         miRepositorio.setContext(context);
