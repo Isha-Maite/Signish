@@ -33,7 +33,7 @@ public class app_demo_video extends Fragment {
 
         appDemoVideo = ui_layout.findViewById(R.id.videoView);
         appDemoVideo.setVideoPath("android.resource://"+
-                getActivity().getPackageName() +"/"+R.raw.demovideo);
+                getActivity().getPackageName() +"/"+R.raw.demovodeo);
 
         mediaController = new MediaController(getContext());
         appDemoVideo.setMediaController(mediaController);
