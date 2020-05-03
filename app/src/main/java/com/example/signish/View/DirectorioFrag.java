@@ -49,10 +49,10 @@ public class DirectorioFrag extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         Spinner spinner;
-        //cuando queremoms compartir viewmodel para el lista detalle
-       //mViewModel = new ViewModelProvider(requireActivity()).get(DirectorioViewModel.class);
+        //cuando queremos compartir viewmodel para el lista detalle
+        mViewModel = new ViewModelProvider(requireActivity()).get(DirectorioViewModel.class);
 
-        mViewModel = ViewModelProviders.of(this).get(DirectorioViewModel.class);
+        //mViewModel = ViewModelProviders.of(this).get(DirectorioViewModel.class);
 
         View interfazDep = inflater.inflate(R.layout.directorio_fragment, container, false);
 
@@ -111,7 +111,7 @@ public class DirectorioFrag extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(DirectorioViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(DirectorioViewModel.class);
         // TODO: Use the ViewModel
     }
 
@@ -176,11 +176,11 @@ public class DirectorioFrag extends Fragment {
 
             }
 
-            public void rellenarContacto (User user){
+            /*public void rellenarContacto (User user){
                 nombre.setText(user.getNombre());
                 apellido.setText(user.getApellido());
                 email.setText(user.getEmail());
-            }
+            }*/
         }
     }
 

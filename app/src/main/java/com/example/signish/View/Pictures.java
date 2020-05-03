@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.signish.R;
 import com.example.signish.ViewModel.PicturesViewModel;
@@ -29,6 +30,7 @@ public class Pictures extends Fragment {
 
     Button subirFoto;
     Button cambiarFoto;
+    ImageView imagen;
 
     public static Pictures newInstance() {
         return new Pictures();
@@ -39,10 +41,11 @@ public class Pictures extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mViewModel = ViewModelProviders.of(this).get(PicturesViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(PicturesViewModel.class);
 
         View pictures_layout = inflater.inflate(R.layout.pictures_fragment, container, false);
 
+        imagen = pictures_layout.findViewById(R.id.imageView2);
         subirFoto = pictures_layout.findViewById(R.id.bttnSubir);
         cambiarFoto = pictures_layout.findViewById(R.id.bttnCambiar);
 
@@ -55,6 +58,13 @@ public class Pictures extends Fragment {
             }
         });
 
+        cambiarFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                hacer_foto();
+            }
+        });
 
 
         return pictures_layout;
@@ -67,13 +77,18 @@ public class Pictures extends Fragment {
 
     }
 
+    private void hacer_foto(){
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, 20);
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(PicturesViewModel.class);
         // TODO: Use the ViewModel
     }
-/*
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -88,7 +103,7 @@ public class Pictures extends Fragment {
             try{
 
                 bitmap = MediaStore.Images.Media
-                        .getBitmap(getContentResolver(), uri);
+                        .getBitmap(getContext().getContentResolver(), uri);
 
 
             }catch (Exception e){
@@ -104,6 +119,6 @@ public class Pictures extends Fragment {
             imagen.setImageBitmap(bitmap);
         }
 
-    }*/
+    }
 
 }

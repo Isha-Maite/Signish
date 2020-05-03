@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.signish.Model.Usuario;
 import com.example.signish.View.DirectorioFrag;
+import com.example.signish.View.Pictures;
 import com.example.signish.View.recieveFeedback;
 import com.example.signish.View.Feedback_Messages;
 import com.example.signish.View.FichajeFragment;
@@ -84,6 +85,15 @@ public class MainActivity extends AppCompatActivity {
         if(id==R.id.menu_departamentos){
             Toast.makeText(this,"Departamentos",Toast.LENGTH_SHORT).show();
             Fragment fm = new DirectorioFrag();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, fm);
+            transaction.commit();
+
+        }
+
+        if(id==R.id.menu_fotos){
+            Toast.makeText(this,"Foto de perfil",Toast.LENGTH_SHORT).show();
+            Fragment fm = new Pictures();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragment_container, fm);
             transaction.commit();

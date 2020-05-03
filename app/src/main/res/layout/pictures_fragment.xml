@@ -15,7 +15,7 @@
         android:layout_marginStart="36dp"
         android:layout_marginEnd="46dp"
         android:layout_marginBottom="100dp"
-        android:text="Cambiar foto"
+        android:text="Hacer foto"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/bttnSubir"
@@ -39,12 +39,15 @@
         android:layout_width="337dp"
         android:layout_height="313dp"
         android:layout_marginStart="19dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="19dp"
         android:layout_marginBottom="80dp"
         android:src="@drawable/ficherlogo"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.416"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
