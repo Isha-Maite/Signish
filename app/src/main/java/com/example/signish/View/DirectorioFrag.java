@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.signish.Model.User;
 import com.example.signish.R;
 import com.example.signish.ViewModel.DirectorioViewModel;
+import com.example.signish.ViewModel.LoginVistaModelo;
 
 import java.util.ArrayList;
 
@@ -48,12 +49,10 @@ public class DirectorioFrag extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         Spinner spinner;
-
-        //mViewModel = ViewModelProviders.of(this).get(DirectorioViewModel.class);
         //cuando queremoms compartir viewmodel para el lista detalle
-        mViewModel = new ViewModelProvider(requireActivity()).get(DirectorioViewModel.class);
+       //mViewModel = new ViewModelProvider(requireActivity()).get(DirectorioViewModel.class);
 
-        //mViewModel = new ViewModelProviders.of(this).get(DirectorioViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(DirectorioViewModel.class);
 
         View interfazDep = inflater.inflate(R.layout.directorio_fragment, container, false);
 
@@ -100,6 +99,7 @@ public class DirectorioFrag extends Fragment {
 
                 //cuando se modifique la lista de contactos, se actualice arraylist que utiliza el adaptador
                 listado_users = users;
+
                 userAdapter.notifyDataSetChanged();
             }
         });
