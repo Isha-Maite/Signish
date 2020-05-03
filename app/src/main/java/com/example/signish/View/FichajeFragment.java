@@ -32,7 +32,6 @@ public class FichajeFragment extends Fragment {
     private FichajeViewModel mViewModel;
     Button entryButton;
     Button exitButton;
-    Button loadRegistry;
     //TextView chnageText;
     Button internetButton;
     MainActivity mainActivity;
@@ -60,7 +59,6 @@ public class FichajeFragment extends Fragment {
         mViewModel.setContext(getContext());
         entryButton = ui_layout.findViewById(R.id.button);
         exitButton = ui_layout.findViewById(R.id.button2);
-        loadRegistry = ui_layout.findViewById(R.id.button3);
         botonFichajes = ui_layout.findViewById(R.id.verFichajes);
 
 
@@ -101,20 +99,6 @@ public class FichajeFragment extends Fragment {
                 guardar(accion);
             }
         });
-
-        loadRegistry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("\n Read Button Pressed \n");
-                try {
-                    mViewModel.readEntry();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-
 
 
         mainActivity = (MainActivity) getActivity();

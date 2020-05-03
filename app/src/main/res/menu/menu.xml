@@ -9,7 +9,7 @@
         android:id="@+id/menu_in"
         android:visible="false"/>
 
-    <item android:title="List"
+    <item android:title="Entries List"
         android:id="@+id/menu_list"
         android:visible="false"/>
 
@@ -23,6 +23,10 @@
 
     <item android:title="Recieve Feedback"
         android:id="@+id/recieveFeedback_menu"
+        android:visible="false"/>
+
+    <item android:title="App demo"
+        android:id="@+id/appDemo_menu"
         android:visible="false"/>
 
     <item android:title="Logout"

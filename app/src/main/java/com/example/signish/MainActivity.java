@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 
 import com.example.signish.Model.Usuario;
+import com.example.signish.View.Listado;
+import com.example.signish.View.app_demo_video;
 import com.example.signish.View.recieveFeedback;
 import com.example.signish.View.Feedback_Messages;
 import com.example.signish.View.FichajeFragment;
@@ -80,6 +82,15 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        if(id==R.id.menu_list){
+            Toast.makeText(this,"Entries List",Toast.LENGTH_SHORT).show();
+            Fragment fm = new Listado();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, fm);
+            transaction.commit();
+
+        }
+
         if(id==R.id.recieveFeedback_menu){
             Toast.makeText(this,"Recieve Message",Toast.LENGTH_SHORT).show();
             Fragment fm = new recieveFeedback();
@@ -94,6 +105,14 @@ public class MainActivity extends AppCompatActivity {
 
             Hilo hilo1 = new Hilo();
             hilo1.execute("https://agora.xtec.cat/insjoandaustria/moodle/login/index.php");
+        }
+
+        if(id==R.id.appDemo_menu){
+            Toast.makeText(this,"App Demo",Toast.LENGTH_SHORT).show();
+            Fragment fm = new app_demo_video();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, fm);
+            transaction.commit();
         }
 
         if(id==R.id.logout){
