@@ -17,6 +17,14 @@
         android:id="@+id/menu_intranet"
         android:visible="false"/>
 
+    <item android:title="Departamentos"
+        android:id="@+id/menu_departamentos"
+        android:visible="false"/>
+
+    <item android:title="Foto"
+        android:id="@+id/menu_fotos"
+        android:visible="false"/>
+
     <item android:title="FeedBack Message"
         android:id="@+id/menu_feedback"
         android:visible="false"/>

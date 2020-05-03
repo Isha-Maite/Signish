@@ -23,6 +23,8 @@ import android.widget.Toast;
 import com.example.signish.Model.Usuario;
 import com.example.signish.View.Listado;
 import com.example.signish.View.app_demo_video;
+import com.example.signish.View.DirectorioFrag;
+import com.example.signish.View.Pictures;
 import com.example.signish.View.recieveFeedback;
 import com.example.signish.View.Feedback_Messages;
 import com.example.signish.View.FichajeFragment;
@@ -37,7 +39,7 @@ import java.nio.charset.StandardCharsets;
 public class MainActivity extends AppCompatActivity {
 
     FragmentManager fragManager;
-    Repository miRepositorio = Repository.get();
+    Repository miRepositorio = Repository.getRepository();
     String variableDatosGoogle ="";
 
     Menu menu;
@@ -85,6 +87,24 @@ public class MainActivity extends AppCompatActivity {
         if(id==R.id.menu_list){
             Toast.makeText(this,"Entries List",Toast.LENGTH_SHORT).show();
             Fragment fm = new Listado();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, fm);
+            transaction.commit();
+
+        }
+
+        if(id==R.id.menu_departamentos){
+            Toast.makeText(this,"Departamentos",Toast.LENGTH_SHORT).show();
+            Fragment fm = new DirectorioFrag();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, fm);
+            transaction.commit();
+
+        }
+
+        if(id==R.id.menu_fotos){
+            Toast.makeText(this,"Foto de perfil",Toast.LENGTH_SHORT).show();
+            Fragment fm = new Pictures();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragment_container, fm);
             transaction.commit();
@@ -143,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
         createEntry();
         UsuarioDbHelper admin = new UsuarioDbHelper(this);
-//        miRepositorio.createFichajeEntrada();
+        miRepositorio.createFichajeEntrada();
     }
 
 

@@ -4,8 +4,6 @@ import android.content.Context;
 
 import com.example.signish.Repository;
 
-import java.io.IOException;
-
 import androidx.lifecycle.ViewModel;
 
 //Recibe instrucciones de vista para avisar controlador
@@ -14,7 +12,7 @@ public class LoginVistaModelo extends ViewModel {
 
     //Variables y atributos
 
-    Repository miRepositorio = Repository.get();
+    Repository miRepositorio = Repository.getRepository();
 
     public void setContext(Context context){
         miRepositorio.setContext(context);
